@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DB_project</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width , initial-scale=1.0">
+    
+    <link rel="stylesheet" href="css/reset.css?v=1">
+    <link rel="stylesheet" href="css/root.css?v=1">
+    <link rel="stylesheet" href="css/clientarea.css?v=1">
+    <link rel="stylesheet" href="css/all.min.css?v=1">
+
+</head>
+<body>
+     <div class="login">
+         <div class="forms8 forms">
+             <div class="arrow-header">
+                 <span>ورود به سامانه</span>
+                 <div class="arrow"></div>
+             </div>
+             <div class="form">
+                 <input type="text" name="name" id="code"  autocomplete="username" required>
+                 <label for="name" class="label-name">
+                     <span class="content-name">نام کاربری یا شماره موبایل</span>
+                 </label>
+             </div>
+             <div class="form">
+                 <input type="password" name="pass" id="pass" autocomplete="off" required>
+                 <label for="pass" class="label-name">
+                     <span class="content-name">رمز عبور</span>
+                 </label>
+             </div>
+             <div class="forgot-div">
+                 <a class="forgot-pass" onclick="forgot()">
+
+                 </a>
+             </div>
+             <div class="btn-div">
+                 <button class="btn-login" onclick="send()">
+                     ورود
+                 </button>
+             </div>
+         </div>
+
+         
+         
+        <a class="close-login" href="#"><i class="fa fa-times "></i></a>
+
+    </div>
+        <div class="alert-box hidden">
+            <span id="alert-value">نام کاربری یا  رمز عبور اشتباه است 	</span>
+            <span class="close-alert" onclick="close_it()"> &times; </span>
+        </div>
+       
+         <div id="cl_bt1" class="cl_bt"><i class="fas fa-times" style="font-size:16px;"></i></div>
+         
+
+        <div class="wrapper">
+            <div id="nav">
+                <div class="back" >
+                    <div class="dropdown" >
+                        <a class="dropbtn alpbox">
+                            حساب کاربری
+                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a class="dropdown-content-li" href="" target="_self">
+                                <div onclick="logout()">
+                                    <i class='fas fa-sign-out-alt' aria-hidden='true'></i> 
+                                    خروج از حساب
+                                </div>
+                            </a>
+                            <div class="dropdown-content-li" onclick="first_pass()">
+                                <i class='fa fa-key' aria-hidden='true'></i>
+                                تغییر رمز عبور
+                            </div>
+                        </div>
+                    </div>
+                        <div>
+                            <a href="index.html" class="alpbox" style="color:var(--black)" target="_blank">
+                                <i class="fa fa-home"></i>
+                                خانه
+                            </a>
+                        </div>
+</div>
+
+                <div class="logo-div">
+                    <span>DB_project</span>
+                </div>
+                <a id="icon" onclick="burger();"><i class="fa fa-bars burger" aria-hidden="true"></i></a>
+                <a class="icon2" onclick="first_messagebox();"><i class="fa fa-envelope message" value="۰" aria-hidden="true"></i></a>
+                <div class="more">
+                    <span id="more-span">
+                        DB_project 
+                    </span>
+                </div>
+                <div class="area">
+                    <div class="top">
+                        <img class="top-img" id="top-img-src" />
+                        <div class="top-p">
+                            <div>
+                                <span id="fnamet">نام</span>
+                                <span id="lnamet">خانوادگی</span>
+                            </div>
+                            <span id="usert">کاربر</span></br>
+                            <span id="cmelt">نام کاربری</span>
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <div class="see_karshenas">
+                            <a href="clientarea.html?v=1">
+                                <div class="summary-div">
+                                    <div class="summary-div2">
+                                        <i class="fa fa-home icon-summary circle_number ccir_num" value="۰" aria-hidden="true"></i>
+                                        میزکار
+                                    </div>
+                                </div>
+                            </a>
+                            <details>
+                                <summary>
+                                    <div>
+                                        <i class="fa fa-tasks icon-summary" aria-hidden="true"></i>
+                                        مدیریت کاربر
+                                    </div>
+                                </summary>
+                                <div class="content">
+                                    <ul>
+                                        <li class="content-li" onclick="first_change_user()"><a href="#">test</a></li>                                        
+                                    </ul>
+                                </div>
+                            </details>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="main fix-background animate__animated animate__faster">
+                    <div class="null-div">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+</body>
+</html>
