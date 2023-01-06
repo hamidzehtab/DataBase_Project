@@ -109,11 +109,15 @@ opacity:0.9;
   flex-direction:column;
 
 }
+.top-img-div{
+  position: relative;
+} 
 .top-img{
     border-radius:50%;
     border:1px solid white ;
     width : 90px; 
-    height : 90px; 
+    height : 90px;
+    
 }
 .top-p{
     text-align:center;
@@ -388,3 +392,20 @@ opacity:0.9;
 
 
 
+.p-image {
+  position: absolute;
+  bottom: 0px;
+  left: 7px;
+  color: white;
+  transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+  cursor: pointer;
+}
+.p-image:hover {
+transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+}
+.upload-button {
+font-size: 1.2em;
+}
+.file-upload-input {
+  display: none;
+}

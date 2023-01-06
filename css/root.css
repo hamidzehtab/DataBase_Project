@@ -502,3 +502,74 @@ details[open] summary ~ *{
 .dropdown:hover .dropdown-content {display: block;}
 
 .dropdown:hover .dropbtn {background-color: orange;}
+
+
+
+
+.table-specific{
+    width:100%;
+    border-collapse:collapse;
+    overflow:visible;
+}
+.table-specific td, .table-specific th{
+    padding:4px 4px; 
+    border:1px solid #ddd ; 
+    text-align:center;
+    vertical-align: middle;
+}
+.table-specific th{
+    background-color: #2d3436; 
+    color:white ;
+}
+.table-specific tbody tr:nth-child(even){
+    background-color: #F8EFBA; 
+}
+.table-specific tbody tr:nth-child(odd){
+    background-color: #ecf0f1; 
+}
+
+.table-specific caption{
+    text-align:right;
+    padding:10px;
+    font-size:20px;
+    background-color: #ecf0f1; 
+}
+.table-specific td i{
+    cursor:pointer;
+}
+
+
+
+
+@media (max-width:767px){
+    .table-specific:not(.week-tab) thead{
+        display:none; 
+    }
+    .table-specific:not(.week-tab) , .table-specific:not(.week-tab) tbody , .table-specific:not(.week-tab) tr , .table-specific:not(.week-tab) td{
+        display:block;
+        width:100% ;
+    }
+    .table-specific:not(.week-tab) tr{
+        margin-bottom:15px; 
+    }
+    .table-specific:not(.week-tab) td{
+        text-align:left;
+        padding-right : 50%;
+        text-align:left;
+        position:relative;
+    }
+    .table-specific:not(.week-tab) td::before{
+        content:attr(data-label);
+        position:absolute;
+        right:0;
+        width:50%; 
+        padding-right:15px; 
+        font-size:15px;
+        text-align:right;
+    }
+    .table-specific:not(.week-tab) caption{
+        width:100%;
+    }
+
+}
+

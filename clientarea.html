@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="css/clientarea.css?v=1">
     <link rel="stylesheet" href="css/all.min.css?v=1">
 
+    <meta name="msapplication-TileImage" content="images/icon.png">
+    <link rel="image_src" href="images/icon.png">
+    <meta property="og:iage" content="images/icon.png">
+    <link rel="icon" type="image/png" href="images/icon.png">
+
 </head>
 <body>
      <div class="login">
@@ -96,7 +101,13 @@
                 </div>
                 <div class="area">
                     <div class="top">
-                        <img class="top-img" id="top-img-src" />
+                        <div class="top-img-div">
+                            <img class="top-img" src="images/fum.png" id="top-img-src" />
+                            <div class="p-image">
+                                <i class="fa fa-camera upload-button"></i>
+                                <input class="file-upload-input" id="file_input-1" type="file" accept="image/*" />
+                            </div>
+                        </div>
                         <div class="top-p">
                             <div>
                                 <span id="fnamet">نام</span>
@@ -135,6 +146,21 @@
                 </div>
                 <div class="main fix-background animate__animated animate__faster">
                     <div class="null-div">
+                        <table class='table-specific' ><thead><tr>
+                            <th>th1</th>
+                            <th>th2</th>
+                            <th>th3</th>
+                            </tr>
+                            </thead>
+                            <tbody><tr><td data-label='th1' >
+                                td1
+                                </td>
+                                <td data-label='th2' >td2
+                                </td>
+                                <td data-label='th3' >td3 
+                                </td></tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
