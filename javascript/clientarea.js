@@ -25,6 +25,60 @@ function en_to_fa(num) {
       .replaceAll("9", "۹");
 }
 
+function separateNum(value, input) {
+    var nStr = value + '';
+    nStr = nStr.replace(/\,/g, "");
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    if (input !== undefined) {
+        input.text = x1 + x2;
+    } else {
+        return x1 + x2;
+    }
+}
+var a ; 
+                for(var i = 0;i<$(".sepr").length;i++){
+                    document.getElementsByClassName("sepr")[i].innerHTML =
+                    separateNum(document.getElementsByClassName("sepr")[i].innerHTML, a);
+                }
+
+
+var ok = 1;
+
+function burger() {
+    if (ok) {
+        $(".area").slideUp();
+        setTimeout(function () {
+            document.getElementById("nav").style.gridTemplateAreas = "'logo icon icon2 more user_div''main main main main main'";
+            $(".main").removeClass('animate__fadeOut');
+
+            $(".main").addClass('animate__fadeIn');
+        }, 850);
+        $(".main").addClass('animate__fadeOut');
+
+    } else {
+        $(".main").removeClass('animate__fadeIn');
+
+        setTimeout(function () {
+            //document.getElementById("nav").style.gridTemplateAreas = " 'logo icon icon2 more back' 'area main main main main' ";
+            document.getElementById("nav").style.gridTemplateAreas = " 'logo icon icon2 more user_div' 'area main main main main' ";
+            $(".main").removeClass('animate__fadeOut');
+            $(".area").slideDown();
+
+
+            $(".main").addClass('animate__fadeIn');
+        }, 850);
+        $(".main").addClass('animate__fadeOut');
+    }
+    ok = 1 - ok;
+}
+
+
 function FilterkeyWord_all_table() {
 
     count = $('.filter').children('tbody').children('tr:first-child').children('td').length; 
@@ -66,3 +120,6 @@ function FilterkeyWord_all_table() {
         }
     }
 }
+
+
+

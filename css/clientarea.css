@@ -209,6 +209,8 @@ summary:hover{
 
 .form{
     background-color : transparent;
+	max-width: 300px;
+	
 }
 .form input{
 	background-color: transparent;
@@ -443,6 +445,22 @@ font-size: 1.2em;
   margin-right:7px;
 }
 
+.incomp{
+    padding:1px 9px;
+    display:inline;
+    background-color:white;
+    border:1px solid #ccc;
+    cursor:pointer;
+    transition:all .3s ease-in;
+    text-align:center;
+}
+.incomp:hover{
+    background-color:#ccc;
+}
+.height{
+    padding-top:12px !important;
+    padding-bottom:12px !important;
+}
 
 @media screen and (max-width: 970px) {
   .caption-div {
