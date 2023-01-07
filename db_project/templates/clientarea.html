@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,15 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width , initial-scale=1.0">
     
-    <link rel="stylesheet" href="css/reset.css?v=1">
-    <link rel="stylesheet" href="css/root.css?v=1">
-    <link rel="stylesheet" href="css/clientarea.css?v=1">
-    <link rel="stylesheet" href="css/all.min.css?v=1">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/root.css' %}">
+    <link rel="stylesheet" href="{% static 'css/clientarea.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
 
     <meta name="msapplication-TileImage" content="images/icon.png">
-    <link rel="image_src" href="images/icon.png">
-    <meta property="og:iage" content="images/icon.png">
-    <link rel="icon" type="image/png" href="images/icon.png">
+    <link rel="image_src" href="{% static 'images/icon.png' %}">
+    <meta property="og:iage" content="{% static 'images/icon.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/icon.png' %}">
 
 </head>
 <body>
@@ -174,18 +175,21 @@
                         	
 			</div>
                         <table class='table-specific filter' ><thead><tr>
-                            <th>th1</th>
-                            <th>th2</th>
-                            <th>th3</th>
+                            {% for column in columns %}
+                            <th>{{ column }}</th>
+                            {% endfor %}
                             </tr>
                             </thead>
-                            <tbody><tr><td data-label='th1' class='sepr' >
-                                10350
+                            <tbody>
+                            {% for project in projects %}
+                            <tr>
+                            {% for item in project %}
+                                <td data-label='th1' class='sepr' >
+                                {{ item }}
                                 </td>
-                                <td data-label='th2' >td2
-                                </td>
-                                <td data-label='th3' >td3 
-                                </td></tr>
+                            {% endfor %}
+                            </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -195,7 +199,7 @@
 
 
 </body>
-<script src="javascript/jquery.min.js?v=1" type="text/javascript"></script>
-<script src="javascript/clientarea.js" type="text/javascript"></script>
+<script src="{% static 'javascript/jquery.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'javascript/clientarea.js' %}" type="text/javascript"></script>
 
 </html>

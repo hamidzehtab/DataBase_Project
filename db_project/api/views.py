@@ -11,10 +11,10 @@ def get_projects(request):
     columns = []
     for column in cursor.fetchall():
         columns.append(column[0])
-    for project in projects:
-        new_item = dict()
-        for i in range(len(columns)):
-            new_item.update({columns[i]: project[i]})
-        result.append(new_item)
+    # for project in projects:
+    #     new_item = dict()
+    #     for i in range(len(columns)):
+    #         new_item.update({columns[i]: project[i]})
+    #     result.append(new_item)
 
-    return render(request, 'clientarea.html', {'result': result})
+    return render(request, 'clientarea.html', {'columns': columns, 'projects': projects})
