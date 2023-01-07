@@ -102,7 +102,7 @@
                 <div class="area">
                     <div class="top">
                         <div class="top-img-div">
-                            <img class="top-img" src="images/fum.png" id="top-img-src" />
+                            <img class="top-img" src="images/user1.png" id="top-img-src" />
                             <div class="p-image">
                                 <i class="fa fa-camera upload-button"></i>
                                 <input class="file-upload-input" id="file_input-1" type="file" accept="image/*" />
@@ -140,13 +140,30 @@
                                     </ul>
                                 </div>
                             </details>
-
                         </div>
                     </div>
                 </div>
                 <div class="main fix-background animate__animated animate__faster">
                     <div class="null-div">
-                        <table class='table-specific' ><thead><tr>
+                        <div class="dash-div">
+                            <div class="form">
+                                <input type="text" name="name" id="code" autocomplete="username" required>
+                                <label for="name" class="label-name">
+                                <span class="content-name">x</span>
+                                </label>
+                            </div>
+                            <div class="form">
+                                <input type="text" name="name" id="code" autocomplete="username" required>
+                                <label for="name" class="label-name">
+                                <span class="content-name">y</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class='caption-div'>
+                            caption 
+                            <input type='text' id='search_input_all' onkeyup='FilterkeyWord_all_table()' placeholder='جستجو...' >
+                        </div>
+                        <table class='table-specific filter' ><thead><tr>
                             <th>th1</th>
                             <th>th2</th>
                             <th>th3</th>
@@ -168,4 +185,7 @@
 
 
 </body>
+<script src="javascript/jquery.min.js?v=1" type="text/javascript"></script>
+<script src="javascript/clientarea.js" type="text/javascript"></script>
+
 </html>

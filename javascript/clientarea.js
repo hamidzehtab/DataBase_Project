@@ -1,0 +1,68 @@
+function fa_to_en(num) {
+    return num
+      .replaceAll("۰", "0")
+      .replaceAll("۱", "1")
+      .replaceAll("۲", "2")
+      .replaceAll("۳", "3")
+      .replaceAll("۴", "4")
+      .replaceAll("۵", "5")
+      .replaceAll("۶", "6")
+      .replaceAll("۷", "7")
+      .replaceAll("۸", "8")
+      .replaceAll("۹", "9");
+}
+function en_to_fa(num) {
+    return num
+      .replaceAll("0", "۰")
+      .replaceAll("1", "۱")
+      .replaceAll("2", "۲")
+      .replaceAll("3", "۳")
+      .replaceAll("4", "۴")
+      .replaceAll("5", "۵")
+      .replaceAll("6", "۶")
+      .replaceAll("7", "۷")
+      .replaceAll("8", "۸")
+      .replaceAll("9", "۹");
+}
+
+function FilterkeyWord_all_table() {
+
+    count = $('.filter').children('tbody').children('tr:first-child').children('td').length; 
+    var input, filter, table, tr, td, i;
+    input = document.getElementById("search_input_all");
+    filter = input.value.toLowerCase();
+    filter = en_to_fa(filter);
+    var filter2 = fa_to_en(filter);
+
+    table =  document.getElementsByClassName("filter")[0];
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 1; i < tr.length; i++) {
+          
+        var flag = 0;
+        for(j = 0; j < count; j++){
+            td = tr[i].getElementsByTagName("td")[j];
+            if (td) {
+                var td_text = td.innerHTML;  
+                if (td.innerHTML.toLowerCase().indexOf(filter) > -1 || td.innerHTML.toLowerCase().indexOf(filter2)> -1 ) {
+                    flag = 1;
+                    if(filter!=""){
+                        td.style.color = "white";
+                        td.style.backgroundColor = "green";
+                    }else{
+                        td.style.color = "";
+                        td.style.backgroundColor = "";
+                    }
+                } else {
+                    td.style.color = "";
+                    td.style.backgroundColor = "";
+                }
+            }
+        }
+        if(flag==1){
+            tr[i].style.display = "";
+        }else {
+            tr[i].style.display = "none";
+        }
+    }
+}
