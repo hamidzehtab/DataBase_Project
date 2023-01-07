@@ -184,7 +184,7 @@
                             {% for project in projects %}
                             <tr>
                             {% for item in project %}
-                                <td data-label='th1' class='sepr' >
+                                    <td data-label='{{ column }}' class='sepr' >
                                 {{ item }}
                                 </td>
                             {% endfor %}

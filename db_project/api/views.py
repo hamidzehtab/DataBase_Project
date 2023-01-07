@@ -4,9 +4,9 @@ from django.shortcuts import render
 
 def get_projects(request):
     cursor = connection.cursor()
-    cursor.execute('SELECT * FROM project.tbl_factor;')
+    cursor.execute('SELECT * FROM tbl_doreh;')
     projects = cursor.fetchall()
-    cursor.execute('''SHOW columns FROM project.tbl_factor;''')
+    cursor.execute('''SHOW columns FROM project.tbl_doreh;''')
     result = []
     columns = []
     for column in cursor.fetchall():
