@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 def get_projects(request):
     cursor = connection.cursor()
-    cursor.execute('''SELECT * FROM project.tbl_factor;''')
+    cursor.execute('SELECT * FROM project.tbl_factor;')
     projects = cursor.fetchall()
     cursor.execute('''SHOW columns FROM project.tbl_factor;''')
     result = []
@@ -17,4 +17,4 @@ def get_projects(request):
             new_item.update({columns[i]: project[i]})
         result.append(new_item)
 
-    return render(request, 'api.html', {'result': result})
+    return render(request, 'clientarea.html', {'result': result})
