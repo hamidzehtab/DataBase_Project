@@ -547,3 +547,76 @@ select.classic:focus{
   outline: 0;
 }
 
+
+.close-login{
+	position: fixed;
+	top: 6%; 
+	right: 6%;
+	background: var(--main1) ; 
+	height: 45px; 
+	width: 45px;
+	padding: 2px ;
+	margin-right: 10px;
+	border-radius: 3px;
+	justify-content: center; 
+	align-items: center;
+	display: flex;
+    border: 3px solid orange ; 
+    transition : ease-out 0.3s all ; 
+    z-index:1000;
+}
+.close-login i{
+	color:  var(--white) ;
+	font-size: 28px;
+}
+.close-login:hover{
+	background: var(--white) ; 
+    border: 3px solid var(--main1) ;
+    border-radius: 14px;  
+ }
+.close-login:hover > i{
+    color:  var(--main1) ;
+}
+.forms{
+	position: fixed;
+	top: 50% ; 
+	right: 50% ; 
+	transform: translate(+50% , -50%) ; 
+	background: var(--login);
+	width: 320px;
+	display: none;
+	padding: 10px;
+}
+.forms{
+    overflow-y: scroll !important;
+    max-height:90%;
+}
+.arrow-header{
+	background: var(--main1);
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-border-radius: 3px 3px 0 0;
+    -moz-border-radius: 3px 3px 0 0;
+    border-radius: 3px 3px 0 0;
+    color:  var(--login);
+}
+.arrow{
+	background: var(--login);
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  right: calc(50% - 5px);
+  top: 55px;
+  transform: rotate(45deg);
+  z-index:3;
+}
+
+
+
+
+
+
+
