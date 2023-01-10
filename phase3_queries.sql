@@ -59,11 +59,17 @@ CREATE TABLE `tbl_comment` (
 Select * from tbl_comments where id_buy_doreh = '' limit 3;
 
 # 12th query top 3 comments which gave the best score to product
+select * from tbl_comments where id_buy_doreh=@v1 order by score limit 3;
 
 # 13th query top 3 comments which gave the worst score to product
+select * from tbl_comments where id_buy_doreh=@v1 order by score desc limit 3;
 
 # 14th query showing the amount of sale of a product to admin
+select Id,count(*) as buy_number from tbl_buy_doreh group by Id;
 
 # 15th query showing the average sale of store to admin
+select avg(fee),month(date_buy) from tbl_buy_doreh group by month(date_buy);
 
 # 16th query providers of a given city
+select * from tbl_users group by city;
+
