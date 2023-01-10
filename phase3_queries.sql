@@ -37,4 +37,33 @@ Select concat(a.Id," name ",c.title," offered by ",b.name) as offerd_by from tbl
 # 9th query showing the cheapest provider of an item for admin
 Select concat(a.Id," name ",c.title," offered by ",b.name," for the cheapest price") as offerd_by from tbl_institute b left join tbl_doreh a on a.Id = b.id_doreh left join tbl_reshteh c on a.id_reshteh = c.Title where c.Id = '' order by a.fee desc LIMIT 1;
 
-# 10th query 
+# 10th query list of last 10 orders of a user
+#select * from tbl_buy_doreh a1 left join tbl_users a2 on a2.Id=a1.id_username order by a1.adate desc limit 10 
+Select * from tbl_buy_doreh where id_username = 1 order by Id desc limit 10 ;
+Select * from tbl_buy_doreh a left join tbl_users b on a.id_username = b.Id where a.id_username=1 order by a.date_buy desc limit 10;
+
+# 11th query list of comments for a given product
+# select top 3 * from tbl_comments where id_buy_doreh=@v1
+CREATE TABLE `tbl_comment` (
+  `Id` int(11) NOT NULL,
+  `comment` varchar(2000) DEFAULT NULL,
+  `id_username` int(20) DEFAULT NULL,
+  `score` varchar(20) DEFAULT NULL,
+  `id_doreh` int(20) DEFAULT NULL,
+   `adate` datetime default null,
+   PRIMARY KEY (`Id`),
+   Foreign Key (`id_username`) REFERENCES tbl_users(Id),
+   Foreign Key (`id_doreh`) REFERENCES tbl_doreh(Id)
+);
+
+Select * from tbl_comments where id_buy_doreh = '' limit 3;
+
+# 12th query top 3 comments which gave the best score to product
+
+# 13th query top 3 comments which gave the worst score to product
+
+# 14th query showing the amount of sale of a product to admin
+
+# 15th query showing the average sale of store to admin
+
+# 16th query providers of a given city

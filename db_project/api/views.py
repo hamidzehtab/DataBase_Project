@@ -310,4 +310,4 @@ def list_of_cheapest_providerof_products_admin(request):
     #     result.append(new_item)
 
     return render(request, 'clientarea.html', {'columns': columns, 'projects': projects})
->>>>>>> 404b73ab5229acd0f4bec9a132c1ea2b520aec8f
+
