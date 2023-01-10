@@ -21,9 +21,9 @@ def get_projects(request):
 
 def list_of_products(request):
     cursor = connection.cursor()
-    cursor.execute('Select concat(b.title," Code ",a.Id) as list_doreh from tbl_doreh a left join tbl_reshteh b on a.id_reshteh = b.Id;')
+    cursor.execute('Select concat(b.title," Code ",a.Id) as list_doreh from tbl_doreh a left join tbl_reshteh b on a.id_reshteh = b.Id; ')
     projects = cursor.fetchall()
-    cursor.execute('''SHOW columns FROM tbl_doreh;''')
+    #cursor.execute('''SHOW columns FROM tbl_doreh;''')
     result = []
     columns = []
     for column in cursor.fetchall():
@@ -36,19 +36,3 @@ def list_of_products(request):
 
     return render(request, 'clientarea.html', {'columns': columns, 'projects': projects})
 
-def list_of_products(request):
-    cursor = connection.cursor()
-    cursor.execute('Select concat(b.title," Code ",a.Id) as list_doreh from tbl_doreh a left join tbl_reshteh b on a.id_reshteh = b.Id;')
-    projects = cursor.fetchall()
-    cursor.execute('''SHOW columns FROM tbl_doreh;''')
-    result = []
-    columns = []
-    for column in cursor.fetchall():
-        columns.append(column[0])
-    # for project in projects:
-    #     new_item = dict()
-    #     for i in range(len(columns)):
-    #         new_item.update({columns[i]: project[i]})
-    #     result.append(new_item)
-
-    return render(request, 'clientarea.html', {'columns': columns, 'projects': projects})
