@@ -36,3 +36,5 @@ def list_of_products(request):
 
     return render(request, 'clientarea.html', {'columns': columns, 'projects': projects})
 
+
+
