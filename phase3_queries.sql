@@ -48,7 +48,7 @@ CREATE TABLE `tbl_comment` (
   `Id` int(11) NOT NULL,
   `comment` varchar(2000) DEFAULT NULL,
   `id_username` int(20) DEFAULT NULL,
-  `score` varchar(20) DEFAULT NULL,
+  `score` int(20) DEFAULT NULL,
   `id_doreh` int(20) DEFAULT NULL,
    `adate` datetime default null,
    PRIMARY KEY (`Id`),
