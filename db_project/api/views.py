@@ -19,7 +19,7 @@ def list_of_products(request):
     cursor.execute(
         'Select concat(b.title," Code ",a.Id) as list_doreh from tbl_doreh a left join tbl_reshteh b on a.id_reshteh = b.Id; ')
     projects = cursor.fetchall()
-    # cursor.execute('''SHOW columns FROM tbl_doreh;''')
+    cursor.execute('''SHOW columns FROM tbl_doreh;''')
     result = []
     columns = []
     for column in cursor.fetchall():
