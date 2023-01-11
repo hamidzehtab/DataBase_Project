@@ -20,9 +20,13 @@ def list_of_products(request):
     cursor.execute(
         'Select concat(b.title," Code ",a.Id) as list_doreh from tbl_doreh a left join tbl_reshteh b on a.id_reshteh = b.Id; ')
     projects = cursor.fetchall()
+<<<<<<< Updated upstream
     cursor.execute('''SHOW columns FROM tbl_doreh;''')
 =======
 >>>>>>> 5e077d7a8938f3f44b82e64c6297857552f7b35d
+=======
+    #cursor.execute('''SHOW columns FROM tbl_doreh;''')
+>>>>>>> Stashed changes
     result = []
     columns = []
     for column in cursor.fetchall():
@@ -50,14 +54,16 @@ def list_of_products(request):
     #         new_item.update({columns[i]: project[i]})
     #     result.append(new_item)
 
-    return render(request, 'clientarea.html', {'columns': columns, 'projects': projects})
+    return render(request, 'clientarea.html', {'columns': ['list_doreh'], 'projects': projects})
 
-
+<<<<<<< Updated upstream
 def list_of_products(request):
     cursor = connection.cursor()
     cursor.execute('Select concat(b.title," Code ",a.Id) as list_doreh from tbl_doreh a left join tbl_reshteh b on a.id_reshteh = b.Id;')
     projects = cursor.fetchall()
     cursor.execute('''SHOW columns FROM tbl_doreh;''')
+=======
+>>>>>>> Stashed changes
 
 def list_of_users(request):
     cursor = connection.cursor()
