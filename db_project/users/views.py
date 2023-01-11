@@ -15,7 +15,7 @@ def login_user(request):
         )
         if user is not None:
             login(request, user)
-            return render(request, 'api.html', {'context': None})
+            return redirect('a')
 
         print('wrong password or username !')
         alert = 'wrong password or username !'
@@ -33,7 +33,7 @@ def register_user(request):
             user.username = user.username.lower()
             user.save()
             login(request, user)
-            return render(request, 'api.html', {'context': None})
+            return render(request, 'clientarea.html', {'context': None})
         else:
             print('something went wrong!')
             alert = """something went wrong! because one of this reasons:
@@ -50,4 +50,4 @@ def register_user(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('login')
+    return redirect('get_cart')
