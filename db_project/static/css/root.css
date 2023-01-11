@@ -652,3 +652,58 @@ details[open] summary ~ *{
 		}
 }
 
+
+
+.form{
+    width: 80% ; 
+	margin: 0 auto;
+	font-size: 16px;
+	position: relative; 
+	height: 50px ;
+	overflow: hidden;
+    display:flex;
+    flex-direction:column;
+	padding-bottom: 1px;
+	background: var(--black);
+    align-items:flex-end;
+    margin-top:auto;
+}
+
+
+.btn-div{
+	width: 100% ;
+	display: flex;
+}
+.btn-div button{
+	transition: ease 0.3s all ;
+}
+.btn-div button:hover{
+	opacity: 0.8;
+}
+.forms button{
+
+	border-radius: 3px;
+}
+.forms .btn-login{
+	background: var(--main1);
+	color: var(--white);
+	width: 80% ; 
+	margin: 0px auto;
+	margin-bottom: 3px; 
+	outline: none;
+	border: none;
+	height: 35px;
+	cursor: pointer ;
+}
+.forms .btn-register	{
+	background:  var(--white);
+	border: 1px solid var(--header);
+	color: var(--header);
+	width: 80% ; 
+	margin: 0px auto;
+	margin-bottom: 20px; 
+	outline: none;
+	height: 25px;
+	cursor: pointer; 
+}
+
