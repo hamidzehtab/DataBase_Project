@@ -16,7 +16,8 @@ def get_cart(request):
 
 def list_of_products(request):
     cursor = connection.cursor()
-    cursor.execute('''Select concat(b.title," Code ",a.Id) as list_doreh from tbl_doreh a left join tbl_reshteh b on a.id_reshteh = b.Id; ''')
+    cursor.execute('''Select concat(b.title," Code ",a.Id) as list_doreh 
+    from tbl_doreh a left join tbl_reshteh b on a.id_reshteh = b.Id; ''')
     items = cursor.fetchall()
     return render(request, 'clientarea.html', {'columns': ['list_doreh'], 'items': items})
 
@@ -39,7 +40,7 @@ def list_of_orders(request):
     cursor = connection.cursor()
     cursor.execute(
         '''Select d.Title,concat(b.fname," ",b.lname) as name,a.date_buy
-         from tbl_buy_doreh a left join tbl_users b on a.id_username = b.username left join tbl_doreh c on a.id_doreh = c.Id
+         from tbl_buy_doreh a left join tbl_users b on a.id_username = b.Id left join tbl_doreh c on a.id_doreh = c.Id
           left join tbl_reshteh d on d.Id = c.id_reshteh ; ''')
     items = cursor.fetchall()
     return render(request, 'clientarea.html', {'columns': ['title', 'name', 'date'], 'items': items})
@@ -86,7 +87,7 @@ def list_of_top_sold_product_week(request):
         from tbl_buy_doreh a left join tbl_doreh b on a.id_doreh = b.Id left join tbl_reshteh c on c.Id = b.id_reshteh
          where a.date_buy >= DATE(NOW() - INTERVAL 7 Day) group by a.id_doreh order by count(*) desc;''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['num_buy', 'id_username', 'name'], 'items': items})
+    return render(request, 'clientarea.html', {'columns': ['times_bought', 'Title'], 'items': items})
 
 
 def list_of_top_sold_procut_month(request):
@@ -102,9 +103,9 @@ def list_of_top_sold_procut_month(request):
 def list_of_special_offers(request):
     cursor = connection.cursor()
     cursor.execute(
-        '''Select c.title , a.discount2 as off_percentage
-         from tbl_buy_doreh a left join tbl_doreh b on a.id_doreh = b.Id left join tbl_reshteh c on c.Id = b.id_reshteh 
-         where a.discount2 >= (a.fee*15/100);''')
+        '''Select c.title,concat(" code ",b.Id," has ", a.percent_discount, " percent discount") as code_percent 
+        from tbl_discount a left join tbl_doreh b on a.specific_doreh = b.Id 
+        left join tbl_reshteh c on c.Id = b.id_reshteh where a.percent_discount >= 15 ;''')
     items = cursor.fetchall()
     return render(request, 'clientarea.html', {'columns': ['title', 'off_percentage'], 'items': items})
 
