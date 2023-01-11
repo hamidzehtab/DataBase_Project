@@ -571,3 +571,84 @@ details[open] summary ~ *{
     }
 
 }
+
+
+
+.alert-box{
+		position: fixed;
+		pointer-events: none;
+		right: 0 ; 
+		background-color: #e74c3c ; 
+		font-size: 20px ; 
+		bottom: 10px;
+		padding: 15px 40px 15px 15px ;
+		color:#ffffff;
+		min-width: 350px; 
+		overflow-x: hidden; 
+		z-index: 121; 
+}
+
+.alert-box .close-alert{
+		pointer-events: auto;
+		font-size: 20px ;
+		position:absolute;
+		left: 10px;
+		top:15px;	
+		cursor: pointer ; 
+		z-index: 122 ; 
+}
+.alert-box.show::before{
+	content: '' ; 
+	position: fixed;
+	left: 0 ; 
+	bottom: 0 ; 
+	height: 4px ;
+    background-color:white;
+	width: 100% ; 
+	z-index: 122 ;
+	animation: hideMeter 5s linear ; 
+}
+@keyframes hideMeter{
+	0%{
+		width: 100%; 
+	}
+	100%{
+		width: 0% ; 
+	}
+}
+
+.alert-box.show{
+		animation: showAlert 1s ease forwards;
+}
+@keyframes showAlert{
+		0%{
+			transform: translateX(100%);
+		}
+		40%{
+			transform: translateX(-15%);
+		}
+		80%{
+			transform: translateX(0%);
+		}
+		100%{
+			transform: translateX(-10px);
+		}
+}
+.alert-box.hide{
+		animation: hideAlert 1s ease forwards;
+}
+@keyframes hideAlert{
+		0%{
+			transform: translateX(-10px);
+		}
+		40%{
+			transform: translateX(0%);
+		}
+		80%{
+			transform: translateX(-15%);
+		}
+		100%{
+			transform: translateX(100%);
+		}
+}
+
