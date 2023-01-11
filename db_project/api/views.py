@@ -137,3 +137,61 @@ def list_of_cheapest_providerof_products_admin(request):
           where c.Id = '' order by a.fee desc LIMIT 1;''')
     items = cursor.fetchall()
     return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+
+def list_of_last_10_orders_of_user(request):
+    cursor = connection.cursor()
+    cursor.execute(
+        '''Select * from tbl_buy_doreh a left join tbl_users b on a.id_username = b.Id 
+        where a.id_username=1 order by a.date_buy desc limit 10; ''')
+    items = cursor.fetchall()
+    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+
+
+def list_of_comments_for_agiven_product(request):
+    cursor = connection.cursor()
+    cursor.execute(
+        '''Select * from tbl_comments where id_doreh = '' ; ''')
+    items = cursor.fetchall()
+    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+
+def list_of_top3_best_comments_for_agiven_product(request):
+    cursor = connection.cursor()
+    cursor.execute(
+        '''select * from tbl_comments where id_buy_doreh=@v1 order by score limit 3; ''')
+    items = cursor.fetchall()
+    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+
+def list_of_top3_worst_comments_for_agiven_product(request):
+    cursor = connection.cursor()
+    cursor.execute(
+        '''select * from tbl_comments where id_buy_doreh=@v1 order by score desc limit 3; ''')
+    items = cursor.fetchall()
+    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+
+def list_of_sale_for_agiven_product_admin(request):
+    cursor = connection.cursor()
+    cursor.execute(
+        '''select Id,count(*) as buy_number from tbl_buy_doreh group by Id; ''')
+    items = cursor.fetchall()
+    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+
+def list_of_average_sale_for_store_admin(request):
+    cursor = connection.cursor()
+    cursor.execute(
+        '''select avg(fee),month(date_buy),year(date_buy) from tbl_buy_doreh group by month(date_buy),year(date_buy);''')
+    items = cursor.fetchall()
+    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+
+def list_of_users_of_givencity_admin(request):
+    cursor = connection.cursor()
+    cursor.execute(
+        '''select * from tbl_users group by city;''')
+    items = cursor.fetchall()
+    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+
+def list_of_providers_agiven_city_admin(request):
+    cursor = connection.cursor()
+    cursor.execute(
+        '''select * from tbl_institute group by location;''')
+    items = cursor.fetchall()
+    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})

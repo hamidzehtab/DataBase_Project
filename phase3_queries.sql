@@ -68,7 +68,7 @@ CREATE TABLE `tbl_comment` (
    Foreign Key (`id_doreh`) REFERENCES tbl_doreh(Id)
 );
 
-Select * from tbl_comments where id_buy_doreh = '' limit 3;
+Select * from tbl_comments where id_doreh = '' ;
 
 # 12th query top 3 comments which gave the best score to product
 select * from tbl_comments where id_buy_doreh=@v1 order by score limit 3;
@@ -88,7 +88,7 @@ select * from tbl_users group by city;
 
 # 17th query providers of a given city
 alter table tbl_institute add column `city` varchar(20);
-select * from tbl_institute group by city;
+select * from tbl_institute group by location;
 
 
 
