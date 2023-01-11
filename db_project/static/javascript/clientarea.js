@@ -28,7 +28,7 @@ function en_to_fa(num) {
 function new_token(){
     $('.forms').slideUp();
     $('input[type=password]').val("");    
-    show("لطفا به حساب کاربری خودتان وارد شوید") ;
+    // show("لطفا به حساب کاربری خودتان وارد شوید") ;
     $('.login').fadeIn();
     $('.forms8').slideDown(); 
 }
