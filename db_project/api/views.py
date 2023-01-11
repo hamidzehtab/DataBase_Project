@@ -114,12 +114,11 @@ def list_of_top_10_ussers_all(request):
 
 
 def change_users():
-    txt1 = "<i class='fa fa-user' aria-hidden='true'></i> " + "جست و جو کاربر";
 
     html = '''
        <div class ='forms01 forms mnforms'>
              <div class ='arrow-header'>
-                 <span class ='before-h'>" + txt1 + @"</span>
+                 <span class ='before-h'><i class='fa fa-user' aria-hidden='true'></i> " + "جست و جو کاربر</span>
                  <div class ='arrow'></div>
              </div>
              <div class ='inform-div'>
