@@ -25,6 +25,14 @@ function en_to_fa(num) {
       .replaceAll("9", "۹");
 }
 
+function new_token(){
+    $('.forms').slideUp();
+    $('input[type=password]').val("");    
+    show("لطفا به حساب کاربری خودتان وارد شوید") ;
+    $('.login').fadeIn();
+    $('.forms8').slideDown(); 
+}
+
 function separateNum(value, input) {
     var nStr = value + '';
     nStr = nStr.replace(/\,/g, "");
