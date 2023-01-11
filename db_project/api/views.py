@@ -16,8 +16,7 @@ def get_cart(request):
 
 def list_of_products(request):
     cursor = connection.cursor()
-    cursor.execute(
-        '''Select concat(b.title," Code ",a.Id) as list_doreh from tbl_doreh a left join tbl_reshteh b on a.id_reshteh = b.Id; ''')
+    cursor.execute('''Select concat(b.title," Code ",a.Id) as list_doreh from tbl_doreh a left join tbl_reshteh b on a.id_reshteh = b.Id; ''')
     items = cursor.fetchall()
     return render(request, 'clientarea.html', {'columns': ['list_doreh'], 'items': items})
 
