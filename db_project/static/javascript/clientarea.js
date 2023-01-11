@@ -33,6 +33,21 @@ function new_token(){
     $('.forms8').slideDown(); 
 }
 
+$( document ).ready(function() {
+    const closelogin = document.querySelector('.close-login');
+    closelogin.addEventListener('click',() => {
+		$('.login').fadeOut();
+		$('.forms').slideUp();
+		hide();
+		alertBox.classList.add("hidden");
+		$('input[type=text]').val("");
+        $('input[type=password]').val("");    
+	});
+});
+
+
+
+
 function separateNum(value, input) {
     var nStr = value + '';
     nStr = nStr.replace(/\,/g, "");
@@ -130,4 +145,39 @@ function FilterkeyWord_all_table() {
 }
 
 
+const alertBox = document.querySelector(".alert-box"); 
+const closeBtn = document.querySelector(".close-alert");
+   
+let timer ;
+function show(vr,b=1) {
+    if(b==2){
+        $(".alert-box").css("background-color", "#27ae60");
+    }
+    if(b==1){
+        $(".alert-box").css("background-color", "#e74c3c");
 
+    }
+    document.getElementById("alert-value").innerHTML = vr;
+    alertBox.classList.remove("hide");
+    alertBox.classList.add("show") ; 
+    if(alertBox.classList.contains("hidden")){
+        alertBox.classList.remove("hidden") ; 
+    }
+    timer=setTimeout(function () {
+        hide();
+    },5000)
+}
+    function hide() {
+        alertBox.classList.remove("show");
+        alertBox.classList.add("hide");
+        clearTimeout(timer);
+
+    }
+    function close_it(){
+        hide();
+    }
+
+
+
+
+    
