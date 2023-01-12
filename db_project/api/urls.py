@@ -23,6 +23,15 @@ urlpatterns = [
          name='list_of_providersof_product_admin_2'),
     path('list_of_cheapest_providerof_products_admin', views.list_of_cheapest_providerof_products_admin,
          name='list_of_cheapest_providerof_products_admin'),
+    path('list_of_last_10_orders_of_user', views.list_of_last_10_orders_of_user,name='list_of_last_10_orders_of_user'),
+    path('list_of_comments_for_agiven_product', views.list_of_comments_for_agiven_product,name='list_of_comments_for_agiven_product'),
+    path('list_of_top3_best_comments_for_agiven_product', views.list_of_top3_best_comments_for_agiven_product,name='list_of_top3_best_comments_for_agiven_product'),
+    path('list_of_top3_worst_comments_for_agiven_product', views.list_of_top3_worst_comments_for_agiven_product,name='list_of_top3_worst_comments_for_agiven_product'),
+    path('list_of_sale_for_agiven_product_admin', views.list_of_sale_for_agiven_product_admin,name='list_of_sale_for_agiven_product_admin'),
+    path('list_of_average_sale_for_store_admin', views.list_of_average_sale_for_store_admin,name='list_of_average_sale_for_store_admin'),
+    path('list_of_users_of_givencity_admin', views.list_of_users_of_givencity_admin,name='list_of_users_of_givencity_admin'),
+    path('list_of_providers_agiven_city_admin', views.list_of_providers_agiven_city_admin,name='list_of_providers_agiven_city_admin'),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
