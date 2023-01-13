@@ -27,49 +27,51 @@
             {% csrf_token %}
             {% for field in form %}
                 <div class='form" + @"' style='display:inline-block;margin-left:2%;'>
-                {{ field }}
-                <label class='label-name'>
-                    <span class='content-name'>{{ field.name }}</span>
-                </label>
+                    {{ field }}
+                    <label class='label-name'>
+                        <span class='content-name'>{{ field.name }}</span>
+                    </label>
+                </div>
             {% endfor %}
-{#            <div class='form" + @"' style='display:inline-block;margin-left:2%;'>#}
-{#                <input type='text' name="username" id='inpmod1' onkeyup='search_user_div()' autocomplete='off' required>#}
-{#                <label class='label-name'>#}
-{#                    <span class='content-name'>نام کاربری</span>#}
-{#                </label>#}
-{#            </div>#}
-            {#            <div class='form" + @"' style='display:inline-block;margin-left:2%;'>#}
-            {#                <input type='text' name="first_name" id='inpmod2' onkeyup='search_user_div()' autocomplete='off' required>#}
-            {#                <label class='label-name'>#}
-            {#                    <span class='content-name'>نام</span>#}
-            {#                </label>#}
-            {#            </div>#}
-            {#            <div class='form" + @"' style='display:inline-block;margin-left:2%;'>#}
-            {#                <input type='text' name="last_name" id='inpmod3' onkeyup='search_user_div()' autocomplete='off' required>#}
-            {#                <label class='label-name'>#}
-            {#                    <span class='content-name'>نام خانوادگی</span>#}
-            {#                </label>#}
-            {#            </div>#}
-            {#            <div class='form" + @"' style='display:inline-block;margin-left:2%;'>#}
-            {#                <input type='number' name="ssid" id='inpmod4' onkeyup='search_user_div()' autocomplete='off' required>#}
-            {#                <label class='label-name'>#}
-            {#                    <span class='content-name'>کد ملی</span>#}
-            {#                </label>#}
-            {#            </div>#}
-            {#            <div class='form' style='display:inline-block;margin-left:2%;'>#}
-            {#                <input type='number' name="phone_number" id='inpmod5' onkeyup='search_user_div()' autocomplete='off' required>#}
-            {#                <label class='label-name'>#}
-            {#                    <span class='content-name'>شماره تلفن</span>#}
-            {#                </label>#}
-            {#            </div>#}
-            {#            <div class='select-div' style='margin:0 2px 0 7px;'><span class='select-span'>''' + "سطح دسترسی" + "</span>"#}
-            {#                +#}
-            {#                '''<select class='classic sp-select' name="level" id='inpmod6' onchange='search_user_div()'>#}
-            {#                    <option value='0'>...</option>#}
-            {#                    <option value='1'>کاربر</option>#}
-            {#                    <option value='2'>ادمین</option>#}
-            {#                </select>#}
-            {#            </div>#}
+            <!--            <div class='form" + @"' style='display:inline-block;margin-left:2%;'>
+                            <input type='text' name="username" id='inpmod1' onkeyup='search_user_div()' autocomplete='off' required>
+                            <label class='label-name'>
+                                <span class='content-name'>نام کاربری</span>
+                            </label>
+                        </div>
+                                    <div class='form" + @"' style='display:inline-block;margin-left:2%;'>
+                                        <input type='text' name="first_name" id='inpmod2' onkeyup='search_user_div()' autocomplete='off' required>
+                                        <label class='label-name'>
+                                            <span class='content-name'>نام</span>
+                                        </label>
+                                    </div>
+                                    <div class='form" + @"' style='display:inline-block;margin-left:2%;'>
+                                        <input type='text' name="last_name" id='inpmod3' onkeyup='search_user_div()' autocomplete='off' required>
+                                        <label class='label-name'>
+                                            <span class='content-name'>نام خانوادگی</span>
+                                        </label>
+                                    </div>
+                                    <div class='form" + @"' style='display:inline-block;margin-left:2%;'>
+                                        <input type='number' name="ssid" id='inpmod4' onkeyup='search_user_div()' autocomplete='off' required>
+                                        <label class='label-name'>
+                                            <span class='content-name'>کد ملی</span>
+                                        </label>
+                                    </div>
+                                    <div class='form' style='display:inline-block;margin-left:2%;'>
+                                        <input type='number' name="phone_number" id='inpmod5' onkeyup='search_user_div()' autocomplete='off' required>
+                                        <label class='label-name'>
+                                            <span class='content-name'>شماره تلفن</span>
+                                        </label>
+                                    </div>
+                                    <div class='select-div' style='margin:0 2px 0 7px;'><span class='select-span'>''' + "سطح دسترسی" + "</span>"
+                                        +
+                                        '''<select class='classic sp-select' name="level" id='inpmod6' onchange='search_user_div()'>
+                                            <option value='0'>...</option>
+                                            <option value='1'>کاربر</option>
+                                            <option value='2'>ادمین</option>
+                                        </select>
+                                    </div>
+                                    -->
             <input type="submit" class='incomp height' value="جدید">
         </form>
     </div>

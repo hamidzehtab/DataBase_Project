@@ -54,7 +54,16 @@ def logout_user(request):
 
 
 def change_users(request):
-    form = CustomAdminCreationForm()
     alert = ''
+    if request.method == 'POST':
+        form = CustomAdminCreationForm(request.POST)
+        print(form)
+        if form.is_valid():
+            user = form.save()
+            return redirect('get_cart')
+        else:
+            alert = 'error'
+
+    form = CustomAdminCreationForm()
     context = {'form': form, 'alert': alert}
     return render(request, 'change_users.html', context)
