@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomAdminCreationForm
 
 
 def login_user(request):
@@ -51,3 +51,10 @@ def register_user(request):
 def logout_user(request):
     logout(request)
     return redirect('get_cart')
+
+
+def change_users(request):
+    form = CustomAdminCreationForm()
+    alert = ''
+    context = {'form': form, 'alert': alert}
+    return render(request, 'change_users.html', context)
