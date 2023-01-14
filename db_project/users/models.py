@@ -18,11 +18,7 @@ class CustomUsers(models.Model):
         (user, 'user'),
         (no_name, 'no_name'),
     ]
-    level = models.CharField(
-        max_length=1,
-        choices=LEVEL_CHOICES,
-        default=user,
-    )
+    level = models.CharField(max_length=1, choices=LEVEL_CHOICES, default=user)
 
     def __str__(self):
         return self.username

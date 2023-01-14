@@ -1,6 +1,8 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm, CustomAdminCreationForm
+from django.db import connection
+from django.contrib.auth.hashers import make_password
 
 
 def login_user(request):
@@ -9,13 +11,19 @@ def login_user(request):
     #     return redirect('account')  badan behem bego ino dorost konim
     # age login karde bashe baresh migardonim be safhe main
     if request.method == 'POST':
+        hashed_pwd = make_password(request.POST['password'])
+        print(hashed_pwd)
+        cursor = connection.cursor()
+        cursor.execute(f'''SELECT * FROM auth_user
+         WHERE username="{request.POST['username']}" AND password="{hashed_pwd}"''')
+        print(cursor.fetchall())
         user = authenticate(
             request,
             username=request.POST['username'], password=request.POST['password']
         )
         if user is not None:
             login(request, user)
-            return redirect('a')
+            return redirect('get_cart')
 
         print('wrong password or username !')
         alert = 'wrong password or username !'
@@ -27,6 +35,15 @@ def register_user(request):
     if request.user.is_authenticated:
         return render(request, 'api.html', {'context': None})
     if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        hashed_pwd = make_password(password)
+        cursor = connection.cursor()
+        cursor.execute(f'''SELECT * FROM auth_user WHERE username="{request.POST['username']}" ''')
+        if cursor != 0:
+            print('This username already exists!')
+        else:
+            cursor.execute(f'''INSERT INTO auth_user(username, password) VALUES ({username}, {password})''')
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
