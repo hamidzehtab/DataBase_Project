@@ -33,6 +33,13 @@ function new_token(){
     $('.forms8').slideDown(); 
 }
 
+function change_user(){
+    $('.forms').slideUp();
+    $('input[type=password]').val("");    
+    $('.login').fadeIn();
+    $('.forms01').slideDown(); 
+}
+
 $( document ).ready(function() {
     const closelogin = document.querySelector('.close-login');
     closelogin.addEventListener('click',() => {
@@ -43,6 +50,13 @@ $( document ).ready(function() {
 		$('input[type=text]').val("");
         $('input[type=password]').val("");    
 	});
+
+    $('body').on('keydown', function (event) {
+        if (event.key == "F4") {
+            change_user();
+        }
+    });
+
 });
 
 
