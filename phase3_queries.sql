@@ -102,4 +102,5 @@ Insert into tbl_doreh('Id','id_reshteh','code_doreh','start_doreh','end_doreh','
 Update tbl_doreh a set a.code_doreh = , a.start_dorehh= , a.end_doreh = , a.fee= , a.closed = where Id=;
 Delete from tbl_doreh where Id= ;
 
+# queries for creating , deleting and updating products by Admin
 Update 
