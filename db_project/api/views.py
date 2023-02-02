@@ -307,11 +307,20 @@ def list_of_providersof_product_admin_2(request):
     columns = []
     for column in cursor.fetchall():
         columns.append(column[0])
+<<<<<<< Updated upstream
     # for project in projects:
     #     new_item = dict()
     #     for i in range(len(columns)):
     #         new_item.update({columns[i]: project[i]})
     #     result.append(new_item)
+=======
+    cursor.execute('''SHOW columns FROM tbl_users;''')
+    for column in cursor.fetchall():
+        columns.append(column[0])
+    columns.append('input')
+    return render(request, 'clientarea.html', {'columns': ['Id','id_doreh','date_buy','id_username','fee'], 'items': items[:5]})
+
+>>>>>>> Stashed changes
 
     return render(request, 'clientarea.html', {'columns': columns, 'projects': projects})
 
