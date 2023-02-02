@@ -279,18 +279,40 @@ def list_of_providers_agiven_city_admin(request):
     return render(request, 'clientarea.html', {'columns': columns, 'items': items})
 
 def creating_products_by_admin(request):
-    num = 101
+    num = []
     if request.method == 'POST':
         num = request.POST['input']
     cursor = connection.cursor()
     cursor.execute(
-        '''Insert into tbl_doreh('Id','id_reshteh','code_doreh','start_doreh','end_doreh','fee') 
-        values (num[0],num[1],num[2],f'{num[3]}',f'{num[4]}',);
+        f'''Insert into tbl_doreh('Id','id_reshteh','code_doreh','start_doreh','end_doreh','fee') 
+        values ({num[0]},{num[1]},{num[2]},'{num[3]}','{num[4]}',{num[5]});
 ''')
     items = cursor.fetchall()
-    cursor.execute('''SHOW columns FROM tbl_institute;''')
-    columns = []
-    for column in cursor.fetchall():
-        columns.append(column[0])
-    return render(request, 'clientarea.html', {'columns': columns, 'items': items})
+
+
+
+def updating_products_by_admin(request):
+    num = []
+    if request.method == 'POST':
+        num = request.POST['input']
+    cursor = connection.cursor()
+    cursor.execute(
+        f'''Update tbl_doreh a set a.code_doreh = {num[1]}, a.start_dorehh= {num[2]},
+         a.end_doreh = {num[3]}, a.fee= {num[4]}, a.closed = {num[5]}
+        where Id={num[0]};
+''')
+    items = cursor.fetchall()
+
+
+
+def deletin_products_by_admin(request):
+    num = []
+    if request.method == 'POST':
+        num = request.POST['input']
+    cursor = connection.cursor()
+    cursor.execute(
+        f'''Delete from tbl_doreh where Id={num[0]} ;''')
+    items = cursor.fetchall()
+
+
 
