@@ -150,9 +150,13 @@ def list_of_last_10_orders_of_user(request):
 def list_of_comments_for_agiven_product(request):
     cursor = connection.cursor()
     cursor.execute(
-        '''Select * from tbl_comments where id_doreh = '' ; ''')
+        '''Select * from tbl_comment where id_doreh = 101 ; ''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+    cursor.execute('''SHOW columns FROM tbl_comment;''')
+    columns = []
+    for column in cursor.fetchall():
+        columns.append(column[0])
+    return render(request, 'clientarea.html', {'columns': columns, 'items': items})
 
 def list_of_top3_best_comments_for_agiven_product(request):
     cursor = connection.cursor()
