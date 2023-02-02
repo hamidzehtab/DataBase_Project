@@ -67,7 +67,7 @@ def register_user(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('get_cart')
+    return redirect('index')
 
 
 def change_users(request):

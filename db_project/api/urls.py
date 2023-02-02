@@ -5,6 +5,7 @@ from django.conf import settings
 
 # first name is for route , the second one is for frontend
 urlpatterns = [
+    path('', views.index_page, name='index'),
     path('get_cart', views.get_cart, name='get_cart'),
     path('get_cart', views.get_cart, name='get_cart'),
     path('list_of_products', views.list_of_products, name='list_of_products'),
