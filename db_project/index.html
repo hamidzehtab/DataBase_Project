@@ -217,18 +217,160 @@
         </div>
         <div class="area">
             <div class="top">
+                <div class="top-img-div">
+                    <img class="top-img" src="images/user1.png" id="top-img-src"/>
+                    <div class="p-image">
+                        <i class="fa fa-camera upload-button"></i>
+                        <input class="file-upload-input" id="file_input-1" type="file" accept="image/*"/>
+                    </div>
+                </div>
                 <div class="top-p">
-                    welcome
+                    <div>
+                        <span id="fnamet">نام</span>
+                        <span id="lnamet">خانوادگی</span>
+                    </div>
+                    <span id="usert">کاربر</span></br>
+                    <span id="cmelt">نام کاربری</span>
                 </div>
             </div>
             <div class="bottom">
+                <div class="see_karshenas">
+                    <a href="clientarea.html?v=1">
+                        <div class="summary-div">
+                            <div class="summary-div2">
+                                <i class="fa fa-home icon-summary circle_number ccir_num" value="۰"
+                                   aria-hidden="true"></i>
+                                میزکار
+                            </div>
+                        </div>
+                    </a>
+                    <details>
+                        <summary>
+                            <div>
+                                <i class="fa fa-user icon-summary" aria-hidden="true"></i>
+                                کاربر و سفارش
+                            </div>
+                        </summary>
+                        <div class="content">
+                            <ul>
+                            <li class="content-li" onclick="change_user()"><a href="#">user(F4)</a></li>
+                            <li class="content-li" onclick=""><a href="list_of_products">لیست محصولات</a></li>
+                            <li class="content-li" onclick=""><a href="list_of_users">لیست کاربران</a></li>
+                            <li class="content-li" onclick=""><a href="list_of_orders">سفارشات</a></li>
+                            <li class="content-li" onclick=""><a href="list_of_top_10_users_all">ده برتر</a></li>
+                            <li class="content-li" onclick=""><a href="list_of_top_10_users_week">ده برتر هفته</a></li>
+                            <li class="content-li" onclick=""><a href="list_of_top_10_users_month">ده برتر ماه</a></li>
+                            <li class="content-li" onclick=""><a href="list_of_last_10_orders_of_user">10 سفارش آخر کاربر</a></li>
+                            <li class="content-li" onclick=""><a href="list_of_users_of_givencity_admin">کاربران شهر</a></li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details>
+                        <summary>
+                            <div>
+                                <i class="fa fa-tasks icon-summary" aria-hidden="true"></i>
+                                محصول
+                            </div>
+                        </summary>
+                        <div class="content">
+                            <ul>
+                                <li class="content-li" onclick=""><a href="list_of_product_types">دسته بندی محصولات</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_top_sold_product_week">پرفروش ترین هفته</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_top_sold_procut_month">پرفروش ترین ماه</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_special_offers">پیشنهادات ویژه</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_sale_for_agiven_product_admin">فروش در ماه</a></li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details>
+                        <summary>
+                            <div>
+                                <i class="fas fa-school icon-summary" aria-hidden="true"></i>
+                                فروشنده
+                            </div>
+                        </summary>
+                        <div class="content">
+                            <ul>
+                                <li class="content-li" onclick=""><a href="list_of_providersof_product_admin">فروشنده های دوره</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_providersof_product_admin_2">فروشنده های دوره</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_cheapest_providerof_products_admin">ارزان فروش ترین فروشنده</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_average_sale_for_store_admin">میانگین کل فروش</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_providers_agiven_city_admin">فروشنده شهر</a></li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details>
+                        <summary>
+                            <div>
+                                <i class="fa fa-comment icon-summary" aria-hidden="true"></i>
+                                نظرات
+                            </div>
+                        </summary>
+                        <div class="content">
+                            <ul>
+                                <li class="content-li" onclick=""><a href="list_of_comments_for_agiven_product">نظرات</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_top3_best_comments_for_agiven_product">بهترین نظرات</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_top3_worst_comments_for_agiven_product">بدترین نظرات</a></li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
             </div>
         </div>
         <div class="main fix-background animate__animated animate__faster">
             <div class="null-div">
-                <div class="blank_page">
-                    
+                <div class="dash-div">
+                    <div class="form">
+                        <input type="text" name="name" id="code" autocomplete="username" required>
+                        <label for="name" class="label-name">
+                            <span class="content-name">x</span>
+                        </label>
+                    </div>
+                    <div class="form">
+                        <input type="text" name="name" id="code" autocomplete="username" required>
+                        <label for="name" class="label-name">
+                            <span class="content-name">y</span>
+                        </label>
+                    </div>
+                    <div class='select-div' style='display: inline-block;width: auto;font-size: 15px;' id='sub_func1'>
+                        <span class='select-span' id='zcnt1'> select </span>
+                        <select class='classic sp-select' id='z1-filter'>
+                            <option value='1'>op1</option>
+                            "
+                            <option value='2'>op2</option>
+                            "
+                            <option value='3'>op3</option>
+                            "
+                            <option value='4'>op4</option>
+                        </select>
+                    </div>
+                    <div class='incomp height' onclick='second_exam_plan(-1,0)'> ساخت آزمون کتبی</div>
                 </div>
+                <div class='caption-div'>
+                    caption
+                    <input type='text' id='search_input_all' onkeyup='FilterkeyWord_all_table()' placeholder='جستجو...'>
+
+                </div>
+                <table class='table-specific filter'>
+                    <thead>
+                    <tr>
+                        {% for column in columns %}
+                            <th>{{ column }}</th>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in items %}
+                        <tr>
+                            {% for element in item %}
+                                <td data-label='{{ column }}' class='sepr'>
+                                    {{ element }}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
