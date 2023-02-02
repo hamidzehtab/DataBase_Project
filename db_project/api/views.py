@@ -155,14 +155,20 @@ def list_of_last_10_orders_of_user(request):
     for column in cursor.fetchall():
         columns.append(column[0])
     columns.append('input')
+    items = list(items)
+    for i in range(len(items)):
+        items[i] = items[i][0:5]
     return render(request, 'clientarea.html', {'columns': ['Id','id_doreh','date_buy','id_username','fee'], 'items': items})
 
 
 
 def list_of_comments_for_agiven_product(request):
+    num = 1
+    if request.method == 'POST':
+        num = request.POST['input']
     cursor = connection.cursor()
     cursor.execute(
-        '''Select * from tbl_comment where id_doreh = 101 ; ''')
+        f'''Select * from tbl_comment where id_doreh = {num} ; ''')
     items = cursor.fetchall()
     cursor.execute('''SHOW columns FROM tbl_comment;''')
     columns = []
@@ -171,9 +177,12 @@ def list_of_comments_for_agiven_product(request):
     return render(request, 'clientarea.html', {'columns': columns, 'items': items})
 
 def list_of_top3_best_comments_for_agiven_product(request):
+    num = 1
+    if request.method == 'POST':
+        num = request.POST['input']
     cursor = connection.cursor()
     cursor.execute(
-        '''select * from tbl_comments where id_buy_doreh=@v1 order by score limit 3; ''')
+        f'''select * from tbl_comments where id_buy_doreh={num} order by score limit 3; ''')
     items = cursor.fetchall()
     return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
 
