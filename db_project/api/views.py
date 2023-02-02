@@ -250,7 +250,11 @@ def list_of_users_of_givencity_admin(request):
     cursor.execute(
         '''select * from tbl_users group by city;''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+    cursor.execute('''SHOW columns FROM tbl_users;''')
+    columns = []
+    for column in cursor.fetchall():
+        columns.append(column[0])
+    return render(request, 'clientarea.html', {'columns': columns, 'items': items})
 
 
 def list_of_providers_agiven_city_admin(request):
