@@ -71,10 +71,10 @@ CREATE TABLE `tbl_comment` (
 Select * from tbl_comments where id_doreh = '' ;
 
 # 12th query top 3 comments which gave the best score to product
-select * from tbl_comments where id_buy_doreh=@v1 order by score limit 3;
+select * from tbl_comment where id_doreh=101 order by score limit 3;
 
 # 13th query top 3 comments which gave the worst score to product
-select * from tbl_comments where id_buy_doreh=@v1 order by score desc limit 3;
+select * from tbl_comment where id_doreh=101 order by score desc limit 3;
 
 # 14th query showing the amount of sale of a product to admin
 select Id,count(*) as buy_number from tbl_buy_doreh group by Id;
@@ -91,6 +91,15 @@ alter table tbl_institute add column `city` varchar(20);
 select * from tbl_institute group by location;
 
 
-
+select * from tbl_doreh;
 select * from tbl_comment;
 SELECT * FROM tbl_cart;
+
+
+# queries for creating , deleting and updating products by Admin
+
+Insert into tbl_doreh('Id','id_reshteh','code_doreh','start_doreh','end_doreh','fee') values (,,,'','',);
+Update tbl_doreh a set a.code_doreh = , a.start_dorehh= , a.end_doreh = , a.fee= , a.closed = where Id=;
+Delete from tbl_doreh where Id= ;
+
+Update 
