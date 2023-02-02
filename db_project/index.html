@@ -207,8 +207,8 @@
         <div class="logo-div">
             <span>DB_project</span>
         </div>
-        <a id="icon" onclick="burger();"><i class="fa fa-bars burger" aria-hidden="true"></i></a>
-        <a class="icon2" onclick="first_messagebox();"><i class="fa fa-envelope message" value="۰"
+        <a style='display: none;' id="icon" onclick="burger();"><i class="fa fa-bars burger" aria-hidden="true"></i></a>
+        <a style="display: none;" class="icon2" onclick="first_messagebox();"><i class="fa fa-envelope message" value="۰"
                                                           aria-hidden="true"></i></a>
         <div class="more">
                     <span id="more-span">
@@ -218,28 +218,39 @@
         <div class="area">
             <div class="top">
                 <div class="top-img-div">
-                    <img class="top-img" src="images/user1.png" id="top-img-src"/>
-                    <div class="p-image">
-                        <i class="fa fa-camera upload-button"></i>
-                        <input class="file-upload-input" id="file_input-1" type="file" accept="image/*"/>
-                    </div>
+                    
                 </div>
                 <div class="top-p">
-                    <div>
-                        <span id="fnamet">نام</span>
-                        <span id="lnamet">خانوادگی</span>
-                    </div>
-                    <span id="usert">کاربر</span></br>
-                    <span id="cmelt">نام کاربری</span>
+                    
                 </div>
             </div>
             <div class="bottom">
                 
             </div>
         </div>
-        <div class="main fix-background animate__animated animate__faster">
+        <div class="main fix-background ">
             <div class="blank_page">
-                welcome
+                <p>welcome</p>
+                <div class="show_notification details">
+                    <div class='detail det1'>
+                        <div class='detail-img'><img ></div >
+                        <h1 class='detail-h'>title</h1>
+                        <div class='detail-p' style='text-align:justify' >detail
+                        
+                        </div>
+                        <button class='detail-btn btnp' onclick="show('در دست ساخت...')">اطلاعات بیشتر</button>
+                    </div>
+                    <div class='detail det2'>
+                        <div class='detail-img'><img ></div >
+                        <h1 class='detail-h'>title</h1>
+                        <div class='detail-p' style='text-align:justify' >
+                            detail</br>
+                            detail</br>
+                            detail
+                        </div>
+                        <button class='detail-btn btnp' onclick="show('در دست ساخت...')">اطلاعات بیشتر</button>
+                    </div>
+                </div>              
             </div>
         </div>
     </div>

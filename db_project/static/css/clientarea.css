@@ -612,3 +612,181 @@ font-size: 1.2em;
     margin: auto;
     padding: 30px;
 }
+
+.details{
+  display: grid ; 
+  grid-template-columns: 5% 1fr 1fr 1fr 5% ; 
+  grid-template-rows: repeat(10, auto); 
+  grid-template-areas:
+   ". done dtwo dthree ."
+   ". dfour dfive dsix ." 
+   ". d7 d8 d9 ." 
+   ". d10 d11 d12 ." 
+   ". d13 d14 d15 ." 
+   ". d16 d17 d18 ." 
+   ". d19 d20 d21 ." 
+   ". d22 d23 d24 ." 
+   ". d25 d26 d27 ."
+   ". d28 d29 d30 ."; 
+   grid-column-gap: 30px;
+   grid-row-gap: 30px;
+   margin-top: -5px;
+   z-index: -4;
+}
+.detail{
+     z-index: 0;
+    border-radius: 10px;
+    cursor:pointer;
+    padding: 5%;
+    width:100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr ; 
+    grid-row-gap: 20px;
+    grid-template-rows: 100px 50px 100px 40px;
+    grid-template-areas:
+    "img"
+    "h"
+    "p"
+    "b";
+    transition: ease-out 0.6s all;
+    box-shadow:1px 1px 7px rgb(0 0 0 / 20%);
+        background-color:#ffffff;
+
+}
+.detail-btn{
+   grid-area: b;
+   text-align:center; 
+}
+.detail:hover{
+  /*box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.3), 0 8px 15px 0 rgba(0, 0, 0, 0.3);*/ 
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.detail-img{
+  grid-area: img;
+  height:100%;
+  width:100%;
+  padding: 5px;
+  display: flex;
+  overflow:hidden;
+  justify-content: center;
+  align-items: center;
+  transition: ease-out 0.4s all;
+
+}
+.detail-img img{
+  width: auto;
+  height: 100%; 
+}
+.detail-p{
+  grid-area: p; 
+  color: black;
+   overflow: hidden;
+    display: -webkit-box;
+        -webkit-line-clamp: 8;
+        -webkit-box-orient: vertical;
+}
+.detail-h{
+  grid-area: h; 
+  color: black;
+  text-align:center;
+  border-bottom: 1px dashed #e2e2e2;
+  padding-bottom: 22px;
+}
+.det1{grid-area: done ; }
+.det2{grid-area: dtwo ; }
+.det3{grid-area: dthree ; }
+.det4{grid-area: dfour ; }
+.det5{grid-area: dfive ;}
+.det6{grid-area: dsix ;}
+.det7{grid-area: d7 ; }
+.det8{grid-area: d8 ;}
+.det9{grid-area: d9 ;}
+.det10{grid-area: d10 ; }
+.det11{grid-area: d11 ;}
+.det12{grid-area: d12 ;}
+.det13{grid-area: d13 ; }
+.det14{grid-area: d14 ;}
+.det15{grid-area: d15 ;}
+.det16{grid-area: d16 ; }
+.det17{grid-area: d17 ;}
+.det18{grid-area: d18 ;}
+.det19{grid-area: d19 ; }
+.det20{grid-area: d20 ;}
+.det21{grid-area: d21 ;}
+.det22{grid-area: d22 ; }
+.det23{grid-area: d23 ;}
+.det24{grid-area: d24 ;}
+.det25{grid-area: d25 ;}
+.det26{grid-area: d26 ; }
+.det27{grid-area: d27 ;}
+.det28{grid-area: d28 ;}
+.det29{grid-area: d29 ; }
+.det30{grid-area: d30 ;}
+
+
+@media only screen and (max-width: 950px) {
+
+    .details {
+        grid-template-columns: 5% 1fr 1fr 5%;
+        grid-template-rows: repeat(15, auto);
+        grid-template-areas: 
+            ". done dtwo ." 
+            ". dthree dfour ." 
+            ". dfive dsix ."
+            ". d7 d8 ." 
+            ". d9 d10 ." 
+            ". d11 d12 ."
+            ". d13 d14 ." 
+            ". d15 d16 ." 
+            ". d17 d18 ."
+            ". d19 d20 ." 
+            ". d21 d22 ." 
+            ". d23 d24 ."
+            ". d25 d26 ." 
+            ". d27 d28 ." 
+            ". d29 d30 .";
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    .details {
+        grid-template-columns: 5% 1fr 5%;
+        grid-template-rows: repeat(30, auto);
+        grid-template-areas: ". done  ."
+                             ". dtwo ."
+                             ". dthree ."
+                             ". dfour ."
+                             ". dfive ." 
+                             ". dsix ."
+                             ". d7 ."
+                             ". d8 ." 
+                             ". d9 ."
+                             ". d10 ."
+                             ". d11 ." 
+                             ". d12 ."
+                             ". d13 ."
+                             ". d14 ." 
+                             ". d15 ."
+                             ". d16 ."
+                             ". d17 ." 
+                             ". d18 ."
+                            ". d19 ."
+                             ". d20 ." 
+                             ". d21 ."
+                            ". d22 ."
+                             ". d23 ." 
+                             ". d24 ."
+                            ". d25 ."
+                            ". d26 ."
+                             ". d27 ." 
+                             ". d28 ."
+                             ". d29 ." 
+                             ". d30 .";
+         grid-column-gap: 10px;
+        grid-row-gap: 10px;
+    }
+}
