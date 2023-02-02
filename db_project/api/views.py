@@ -139,12 +139,24 @@ def list_of_cheapest_providerof_products_admin(request):
     return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
 
 def list_of_last_10_orders_of_user(request):
+    num = 1
+    if request.method=='POST':
+        num = request.POST['input']
     cursor = connection.cursor()
     cursor.execute(
-        '''Select * from tbl_buy_doreh a left join tbl_users b on a.id_username = b.Id 
-        where a.id_username=1 order by a.date_buy desc limit 10; ''')
+        f'''Select * from tbl_buy_doreh a left join tbl_users b on a.id_username = b.Id 
+        where a.id_username={num} order by a.date_buy desc limit 10; ''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+    cursor.execute('''SHOW columns FROM tbl_buy_doreh;''')
+    columns = []
+    for column in cursor.fetchall():
+        columns.append(column[0])
+    cursor.execute('''SHOW columns FROM tbl_users;''')
+    for column in cursor.fetchall():
+        columns.append(column[0])
+    columns.append('input')
+    return render(request, 'clientarea.html', {'columns': ['Id','id_doreh','date_buy','id_username','fee'], 'items': items})
+
 
 
 def list_of_comments_for_agiven_product(request):
