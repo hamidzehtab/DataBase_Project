@@ -277,3 +277,20 @@ def list_of_providers_agiven_city_admin(request):
     for column in cursor.fetchall():
         columns.append(column[0])
     return render(request, 'clientarea.html', {'columns': columns, 'items': items})
+
+def creating_products_by_admin(request):
+    num = 101
+    if request.method == 'POST':
+        num = request.POST['input']
+    cursor = connection.cursor()
+    cursor.execute(
+        '''Insert into tbl_doreh('Id','id_reshteh','code_doreh','start_doreh','end_doreh','fee') 
+        values (num[0],num[1],num[2],f'{num[3]}',f'{num[4]}',);
+''')
+    items = cursor.fetchall()
+    cursor.execute('''SHOW columns FROM tbl_institute;''')
+    columns = []
+    for column in cursor.fetchall():
+        columns.append(column[0])
+    return render(request, 'clientarea.html', {'columns': columns, 'items': items})
+
