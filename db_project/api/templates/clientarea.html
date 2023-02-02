@@ -360,11 +360,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for project in projects %}
+                    {% for item in items %}
                         <tr>
-                            {% for item in project %}
+                            {% for element in item %}
                                 <td data-label='{{ column }}' class='sepr'>
-                                    {{ item }}
+                                    {{ element }}
                                 </td>
                             {% endfor %}
                         </tr>
