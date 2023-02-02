@@ -191,30 +191,44 @@ def list_of_comments_for_agiven_product(request):
 
 
 def list_of_top3_best_comments_for_agiven_product(request):
-    num = 1
+    num = 101
     if request.method == 'POST':
         num = request.POST['input']
     cursor = connection.cursor()
     cursor.execute(
-        f'''select * from tbl_comments where id_buy_doreh={num} order by score limit 3; ''')
+        f'''select * from tbl_comment where id_doreh={num} order by desc score limit 3; ''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+    cursor.execute('''SHOW columns FROM tbl_comment;''')
+    columns = []
+    for column in cursor.fetchall():
+        columns.append(column[0])
+    return render(request, 'clientarea.html', {'columns': columns, 'items': items})
 
 
 def list_of_top3_worst_comments_for_agiven_product(request):
+    num = 101
+    if request.method == 'POST':
+        num = request.POST['input']
     cursor = connection.cursor()
     cursor.execute(
-        '''select * from tbl_comments where id_buy_doreh=@v1 order by score desc limit 3; ''')
+        f'''select * from tbl_comment where id_doreh={num} order by score limit 2; ''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+    cursor.execute('''SHOW columns FROM tbl_comment;''')
+    columns = []
+    for column in cursor.fetchall():
+        columns.append(column[0])
+    return render(request, 'clientarea.html', {'columns': columns, 'items': items})
 
 
 def list_of_sale_for_agiven_product_admin(request):
+    num = 101
+    if request.method == 'POST':
+        num = request.POST['input']
     cursor = connection.cursor()
     cursor.execute(
         '''select Id,count(*) as buy_number from tbl_buy_doreh group by Id; ''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+    return render(request, 'clientarea.html', {'columns': ['Id','sale'], 'items': items})
 
 
 def list_of_average_sale_for_store_admin(request):
