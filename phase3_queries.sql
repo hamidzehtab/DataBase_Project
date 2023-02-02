@@ -92,4 +92,5 @@ select * from tbl_institute group by location;
 
 
 
-
+select * from tbl_comment;
+SELECT * FROM tbl_cart;
