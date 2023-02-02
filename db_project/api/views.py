@@ -195,7 +195,11 @@ def list_of_top3_worst_comments_for_agiven_product(request):
     cursor.execute(
         '''select * from tbl_comments where id_buy_doreh=@v1 order by score desc limit 3; ''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+    cursor.execute('''SHOW columns FROM tbl_comment;''')
+    columns = []
+    for column in cursor.fetchall():
+        columns.append(column[0])
+    return render(request, 'clientarea.html', {'columns': columns, 'items': items})
 
 def list_of_sale_for_agiven_product_admin(request):
     cursor = connection.cursor()
