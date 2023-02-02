@@ -112,7 +112,7 @@
             </a>
         </div>
 
-        <form action="" method="post">
+        <form action="" method="post" id="custom">
             {% csrf_token %}
             <div class='row-modal' style='margin:5px 0;'>
 
@@ -146,7 +146,8 @@
                         <span class='content-name'>شماره تلفن</span>
                     </label>
                 </div>
-                <div class='select-div' style='margin:0 2px 0 7px;'><span class='select-span'> سطح دسترسی </span><select
+                <div class='select-div' style='margin:0 2px 0 7px;'><span class='select-span'> سطح دسترسی </span>
+                    <select form="custom" name="level">
                         class='classic sp-select' id='inpmod6' onchange='search_user_div()'>
                     <option value='0'>...</option>
                     <option value='1'>کاربر</option>
