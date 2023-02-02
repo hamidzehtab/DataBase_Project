@@ -790,3 +790,32 @@ font-size: 1.2em;
         grid-row-gap: 10px;
     }
 }
+
+
+.fum-div {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    height: 40vh;
+    margin-top: 10px;
+}
+
+.fum {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  width: 70px;
+  height: 68px;
+}
+
+.fum-h {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.fum-p {
+  margin-bottom: 8px;
+}
