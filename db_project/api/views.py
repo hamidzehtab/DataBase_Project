@@ -177,14 +177,18 @@ def list_of_comments_for_agiven_product(request):
     return render(request, 'clientarea.html', {'columns': columns, 'items': items})
 
 def list_of_top3_best_comments_for_agiven_product(request):
-    num = 1
+    num = 101
     if request.method == 'POST':
         num = request.POST['input']
     cursor = connection.cursor()
     cursor.execute(
-        f'''select * from tbl_comments where id_buy_doreh={num} order by score limit 3; ''')
+        f'''select * from tbl_comment where id_doreh={num} order by score limit 3; ''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+    cursor.execute('''SHOW columns FROM tbl_comment;''')
+    columns = []
+    for column in cursor.fetchall():
+        columns.append(column[0])
+    return render(request, 'clientarea.html', {'columns': columns, 'items': items})
 
 def list_of_top3_worst_comments_for_agiven_product(request):
     cursor = connection.cursor()
