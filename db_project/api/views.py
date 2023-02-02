@@ -2,7 +2,6 @@ from django.db import connection
 from django.shortcuts import render
 from django.contrib.auth.hashers import make_password
 
-
 def index_page(request):
     cursor = connection.cursor()
     cursor.execute('''Select concat(b.title," Code ",a.Id) as list_doreh 
@@ -21,8 +20,8 @@ def get_cart(request):
         password = ssid
         phone_number = request.POST['phone_number']
         level = request.POST['level']
-        cursor.execute(
-            f'''INSERT INTO users_customusers VALUES ("3","{username}","{first_name}","{last_name}","{password}","{ssid}","{phone_number}","{level}")''')
+        cursor.execute(f'''INSERT INTO users_customusers VALUES ("3","{username}","{first_name}","{last_name}","{password}","{ssid}","{phone_number}","{level}")''')
+
 
     cursor.execute('SELECT * FROM tbl_cart;')
     items = cursor.fetchall()
@@ -236,7 +235,7 @@ def list_of_sale_for_agiven_product_admin(request):
     cursor.execute(
         '''select Id,count(*) as buy_number from tbl_buy_doreh group by Id; ''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['Id', 'sale'], 'items': items})
+    return render(request, 'clientarea.html', {'columns': ['Id','sale'], 'items': items})
 
 
 def list_of_average_sale_for_store_admin(request):
