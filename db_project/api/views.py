@@ -240,24 +240,41 @@ def list_of_sale_for_agiven_product_admin(request):
 
 
 def list_of_average_sale_for_store_admin(request):
+    num = 101
+    if request.method == 'POST':
+        num = request.POST['input']
     cursor = connection.cursor()
     cursor.execute(
         '''select avg(fee),month(date_buy),year(date_buy) from tbl_buy_doreh group by month(date_buy),year(date_buy);''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+    return render(request, 'clientarea.html', {'columns': ['average','month','year'], 'items': items})
 
 
 def list_of_users_of_givencity_admin(request):
+    num = 101
+    if request.method == 'POST':
+        num = request.POST['input']
     cursor = connection.cursor()
     cursor.execute(
         '''select * from tbl_users group by city;''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+    cursor.execute('''SHOW columns FROM tbl_users;''')
+    columns = []
+    for column in cursor.fetchall():
+        columns.append(column[0])
+    return render(request, 'clientarea.html', {'columns': columns, 'items': items})
 
 
 def list_of_providers_agiven_city_admin(request):
+    num = 101
+    if request.method == 'POST':
+        num = request.POST['input']
     cursor = connection.cursor()
     cursor.execute(
         '''select * from tbl_institute group by location;''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+    cursor.execute('''SHOW columns FROM tbl_institute;''')
+    columns = []
+    for column in cursor.fetchall():
+        columns.append(column[0])
+    return render(request, 'clientarea.html', {'columns': columns, 'items': items})
