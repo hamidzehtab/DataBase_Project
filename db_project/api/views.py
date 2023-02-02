@@ -163,7 +163,7 @@ def list_of_last_10_orders_of_user(request):
 
 
 def list_of_comments_for_agiven_product(request):
-    num = 1
+    num = 101
     if request.method == 'POST':
         num = request.POST['input']
     cursor = connection.cursor()
