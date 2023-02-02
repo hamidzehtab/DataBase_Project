@@ -50,7 +50,7 @@ def register_user(request):
             user.username = user.username.lower()
             user.save()
             login(request, user)
-            return render(request, 'clientarea.html', {'context': None})
+            return render(request, '../api/templates/clientarea.html', {'context': None})
         else:
             print('something went wrong!')
             alert = """something went wrong! because one of this reasons:
