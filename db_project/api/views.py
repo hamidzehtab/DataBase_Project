@@ -1,9 +1,21 @@
 from django.db import connection
 from django.shortcuts import render
+from django.contrib.auth.hashers import make_password
 
 
 def get_cart(request):
     cursor = connection.cursor()
+    if request.method == 'POST':
+        username = request.POST['username']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        ssid = request.POST['ssid']
+        password = ssid
+        phone_number = request.POST['phone_number']
+        level = request.POST['level']
+        cursor.execute(f'''INSERT INTO users_customusers VALUES ("3","{username}","{first_name}","{last_name}","{password}","{ssid}","{phone_number}","{level}")''')
+
+
     cursor.execute('SELECT * FROM tbl_cart;')
     items = cursor.fetchall()
     cursor.execute('''SHOW columns FROM tbl_cart;''')
@@ -138,9 +150,10 @@ def list_of_cheapest_providerof_products_admin(request):
     items = cursor.fetchall()
     return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
 
+
 def list_of_last_10_orders_of_user(request):
     num = 1
-    if request.method=='POST':
+    if request.method == 'POST':
         num = request.POST['input']
     cursor = connection.cursor()
     cursor.execute(
@@ -158,8 +171,8 @@ def list_of_last_10_orders_of_user(request):
     items = list(items)
     for i in range(len(items)):
         items[i] = items[i][0:5]
-    return render(request, 'clientarea.html', {'columns': ['Id','id_doreh','date_buy','id_username','fee'], 'items': items})
-
+    return render(request, 'clientarea.html',
+                  {'columns': ['Id', 'id_doreh', 'date_buy', 'id_username', 'fee'], 'items': items})
 
 
 def list_of_comments_for_agiven_product(request):
@@ -176,6 +189,7 @@ def list_of_comments_for_agiven_product(request):
         columns.append(column[0])
     return render(request, 'clientarea.html', {'columns': columns, 'items': items})
 
+
 def list_of_top3_best_comments_for_agiven_product(request):
     num = 101
     if request.method == 'POST':
@@ -189,6 +203,7 @@ def list_of_top3_best_comments_for_agiven_product(request):
     for column in cursor.fetchall():
         columns.append(column[0])
     return render(request, 'clientarea.html', {'columns': columns, 'items': items})
+
 
 def list_of_top3_worst_comments_for_agiven_product(request):
     num = 101
@@ -204,6 +219,7 @@ def list_of_top3_worst_comments_for_agiven_product(request):
         columns.append(column[0])
     return render(request, 'clientarea.html', {'columns': columns, 'items': items})
 
+
 def list_of_sale_for_agiven_product_admin(request):
     num = 101
     if request.method == 'POST':
@@ -213,6 +229,7 @@ def list_of_sale_for_agiven_product_admin(request):
         '''select Id,count(*) as buy_number from tbl_buy_doreh group by Id; ''')
     items = cursor.fetchall()
     return render(request, 'clientarea.html', {'columns': ['Id','sale'], 'items': items})
+
 
 def list_of_average_sale_for_store_admin(request):
     num = 101
@@ -224,6 +241,7 @@ def list_of_average_sale_for_store_admin(request):
     items = cursor.fetchall()
     return render(request, 'clientarea.html', {'columns': ['average','month','year'], 'items': items})
 
+
 def list_of_users_of_givencity_admin(request):
     num = 101
     if request.method == 'POST':
@@ -233,6 +251,7 @@ def list_of_users_of_givencity_admin(request):
         '''select * from tbl_users group by city;''')
     items = cursor.fetchall()
     return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+
 
 def list_of_providers_agiven_city_admin(request):
     cursor = connection.cursor()
