@@ -210,9 +210,7 @@
             <span>DB_Project</span>
         </div>
         <a style='display: none;' id="icon" onclick="burger();"><i class="fa fa-bars burger" aria-hidden="true"></i></a>
-        <a style="display: none;" class="icon2" onclick="first_messagebox();"><i class="fa fa-envelope message"
-                                                                                 value="۰"
-                                                                                 aria-hidden="true"></i></a>
+        <a style="display: none;" class="icon2" onclick="first_messagebox();"><i class="fa fa-envelope message" value="۰" aria-hidden="true"></i></a>
         <div class="more">
                     <span id="more-span">
                         DB_project
@@ -233,7 +231,11 @@
         </div>
         <div class="main fix-background ">
             <div class="blank_page">
-                <p>welcome</p>
+                <div class="fum-div">
+                    <img class="fum" src="{% static 'images/icon.png' %}">
+                    <h1 class="fum-h">DB_Project</h1>
+                    <p class="fum-p">فروشگاه اینترنتی دوره های آموزشی</p>
+                </div>
                 <div class="show_notification details">
                     {% for item in items %}
                         <div class='detail det{{ i }}'>
