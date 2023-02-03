@@ -37,7 +37,6 @@ def register_user(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        hashed_pwd = make_password(password)
         cursor = connection.cursor()
         cursor.execute(f'''SELECT * FROM auth_user WHERE username="{request.POST['username']}" ''')
         if cursor != 0:

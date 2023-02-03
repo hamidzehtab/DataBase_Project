@@ -32,9 +32,9 @@ urlpatterns = [
     path('list_of_average_sale_for_store_admin', views.list_of_average_sale_for_store_admin,name='list_of_average_sale_for_store_admin'),
     path('list_of_users_of_givencity_admin', views.list_of_users_of_givencity_admin,name='list_of_users_of_givencity_admin'),
     path('list_of_providers_agiven_city_admin', views.list_of_providers_agiven_city_admin,name='list_of_providers_agiven_city_admin'),
-    path('updating_products_by_admin', views.updating_products_by_admin(),name='updating_products_by_admin'),
-    path('deleting_products_by_admin', views.deletin_products_by_admin(),name='deleting_products_by_admin'),
-    path('creating_products_by_admin', views.creating_products_by_admin(),name='creating_products_by_admin'),
+    path('updating_products_by_admin', views.updating_products_by_admin,name='updating_products_by_admin'),
+    path('deleting_products_by_admin', views.deleting_products_by_admin,name='deleting_products_by_admin'),
+    path('creating_products_by_admin', views.creating_products_by_admin,name='creating_products_by_admin'),
 
 ]
 
