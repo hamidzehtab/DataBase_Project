@@ -1,3 +1,6 @@
+
+
+
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -29,7 +32,7 @@
             <div class="form">
                 <input type="text" name="username" id="code" autocomplete="username" required>
                 <label for="name" class="label-name">
-                    <span class="content-name">نام کاربری یا شماره موبایل</span>
+                    <span class="content-name">نام کاربری</span>
                 </label>
             </div>
             <div class="form">
@@ -54,53 +57,42 @@
         </form>
     </div>
     <div class="forms4 forms">
-        <div class="arrow-header">
-            <span>ثبت نام (اطلاعات اولیه)</span>
-            <div class="arrow"></div>
-        </div>
-        <div class="form">
-            <input type="text" name="name" id="username4" autocomplete="off" required>
-            <label for="name" class="label-name">
-                <span class="content-name">نام کاربری</span>
-            </label>
-        </div>
-        <div class="form">
-            <input type="text" id="name4" autocomplete="off" required>
-            <label class="label-name">
-                <span class="content-name">نام</span>
-            </label>
-        </div>
-        <div class="form">
-            <input type="text" id="lname4" autocomplete="off" required>
-            <label class="label-name">
-                <span class="content-name">نام خانوادگی</span>
-            </label>
-        </div>
-        <div class="form">
-            <input type="password" name="pass" id="pass4" autocomplete="off" required>
-            <label for="pass" class="label-name">
-                <span class="content-name">رمز عبور</span>
-            </label>
-        </div>
-        <div class="form">
-            <input type="password" name="pass" id="tpass4" autocomplete="off" required>
-            <label for="pass" class="label-name">
-                <span class="content-name">تکرار رمز عبور</span>
-            </label>
-        </div>
-        <div class="forgot-div">
-            <a class="forgot-pass">
+        <form action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+            <div class="arrow-header">
+                <span>ثبت نام (اطلاعات اولیه)</span>
+                <div class="arrow"></div>
+            </div>
+            {#        <div class="form">#}
+            {#            <input type="text" name="name" id="username4" autocomplete="off" required>#}
+            {#            <label for="name" class="label-name">#}
+            {#                <span class="content-name">نام کاربری</span>#}
+            {#            </label>#}
+            {#        </div>#}
+            {% for field in form2 %}
+                <div class="form__field">
+                    <label for="formInput#confirm-password">{{ field.label }}</label>
+                    <small>{{ field }}</small>
+                    {% for error in field.errors.as_data %}
+                        <p style="color: red;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
 
-            </a>
-        </div>
-        <div class="btn-div">
-            <input class="btn btn--sub btn--lg btn-register" type="submit" value="ثبت نام"/>
-        </div>
-        <div class="btn-div">
-            <button class="btn-register" onclick="back4()">
-                بازگشت به قسمت ورود
-            </button>
-        </div>
+            <div class="forgot-div">
+                <a class="forgot-pass">
+
+                </a>
+            </div>
+            <div class="btn-div">
+                <input class="btn btn--sub btn--lg btn-register" type="submit" value="ثبت نام"/>
+            </div>
+            <div class="btn-div">
+                <button class="btn-register" onclick="back4()">
+                    بازگشت به قسمت ورود
+                </button>
+            </div>
+        </form>
     </div>
     <div class='forms01 forms mnforms'>
         <div class='arrow-header'>
@@ -112,47 +104,26 @@
             </a>
         </div>
 
-        <form action="" method="post" id="custom">
+        <form action="{% url 'change_users' %}" method="post" id="custom">
             {% csrf_token %}
             <div class='row-modal' style='margin:5px 0;'>
 
-                <div class='form' style='display:inline-block;margin-left:2%;'>
-                    <input name='username' type='text' id='inpmod1' onkeyup='search_user_div()' autocomplete='off' required>
-                    <label class='label-name'>
-                        <span class='content-name'>نام کاربری</span>
-                    </label>
-                </div>
-                <div class='form' style='display:inline-block;margin-left:2%;'>
-                    <input name='first_name' type='text' id='inpmod2' onkeyup='search_user_div()' autocomplete='off' required>
-                    <label class='label-name'>
-                        <span class='content-name'>نام</span>
-                    </label>
-                </div>
-                <div class='form' style='display:inline-block;margin-left:2%;'>
-                    <input name='last_name' type='text' id='inpmod3' onkeyup='search_user_div()' autocomplete='off' required>
-                    <label class='label-name'>
-                        <span class='content-name'>نام خانوادگی</span>
-                    </label>
-                </div>
-                <div class='form' style='display:inline-block;margin-left:2%;'>
-                    <input name='ssid' type='number' id='inpmod4' onkeyup='search_user_div()' autocomplete='off' required>
-                    <label class='label-name'>
-                        <span class='content-name'>کد ملی</span>
-                    </label>
-                </div>
-                <div class='form' style='display:inline-block;margin-left:2%;'>
-                    <input name='phone_number' type='number' id='inpmod5' onkeyup='search_user_div()' autocomplete='off' required>
-                    <label class='label-name'>
-                        <span class='content-name'>شماره تلفن</span>
-                    </label>
-                </div>
-                <div class='select-div' style='margin:0 2px 0 7px;'><span class='select-span'> سطح دسترسی </span>
-                    <select form="custom" name="level" class='classic sp-select' id='inpmod6' onchange='search_user_div()'>
-                    <option value='0'>...</option>
-                    <option value='1'>کاربر</option>
-                    <option value='2'>ادمین</option>
-                </select>
-                </div>
+                {#                    <div class='form' style='display:inline-block;margin-left:2%;'>#}
+                {#                        <input name='username' type='text' id='inpmod1' onkeyup='search_user_div()' autocomplete='off' required>#}
+                {#                        <label class='label-name'>#}
+                {#                            <span class='content-name'>نام کاربری</span>#}
+                {#                        </label>#}
+                {#                    </div>#}
+                {% for field in form %}
+                    <div class="form__field">
+                        <label for="formInput#confirm-password">{{ field.label }}</label>
+                        <small>{{ field }}</small>
+                        {% for error in field.errors.as_data %}
+                            <p style="color: red;">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+
                 <div class="incomp height">
                     <input style="border:0px;background-color:transparent;padding: 0px;" type="submit" value="جدید">
                 </div>
@@ -235,12 +206,11 @@
                     </div>
                 </div>
                 <div class="top-p">
-                    <div>
-                        <span id="fnamet">نام</span>
-                        <span id="lnamet">خانوادگی</span>
-                    </div>
-                    <span id="usert">کاربر</span></br>
-                    <span id="cmelt">نام کاربری</span>
+                    {% if request.user.is_authenticated %}
+                        <span id="cmelt">{{ request.user.username }}</span>
+                    {% else %}
+                        <span id="cmelt">نام کاربری</span>
+                    {% endif %}
                 </div>
             </div>
             <div class="bottom">
@@ -273,7 +243,7 @@
                                 </li>
                                 <li class="content-li" onclick=""><a href="list_of_last_10_orders_of_user">10 سفارش آخر
                                     کاربر</a></li>
-                                
+
                             </ul>
                         </div>
                     </details>
@@ -286,7 +256,7 @@
                         </summary>
                         <div class="content">
                             <ul>
-                                
+
                                 <li class="content-li" onclick=""><a href="list_of_product_types">دسته بندی محصولات</a>
                                 </li>
                                 <li class="content-li" onclick=""><a href="list_of_top_sold_product_week">پرفروش ترین
@@ -295,7 +265,7 @@
                                     ماه</a></li>
                                 <li class="content-li" onclick=""><a href="list_of_special_offers">پیشنهادات ویژه</a>
                                 </li>
-                                
+
                             </ul>
                         </div>
                     </details>
@@ -336,27 +306,10 @@
                         <div class="incomp height">
                             <input style="border:0px;background-color:transparent;padding: 0px;" type="submit"
                                    value="enter">
-                    z    </div>
+                            z
+                        </div>
                     </form>
-                    <div class="form">
-                        <input type="text" name="name" id="code" autocomplete="username" required>
-                        <label for="name" class="label-name">
-                            <span class="content-name">y</span>
-                        </label>
-                    </div>
-                    <div class='select-div' style='display: inline-block;width: auto;font-size: 15px;' id='sub_func1'>
-                        <span class='select-span' id='zcnt1'> select </span>
-                        <select class='classic sp-select' id='z1-filter'>
-                            <option value='1'>op1</option>
-                            "
-                            <option value='2'>op2</option>
-                            "
-                            <option value='3'>op3</option>
-                            "
-                            <option value='4'>op4</option>
-                        </select>
-                    </div>
-                    <div class='incomp height' onclick='second_exam_plan(-1,0)'> ساخت آزمون کتبی</div>
+
                 </div>
                 <div class='caption-div'>
                     caption

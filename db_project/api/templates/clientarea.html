@@ -55,40 +55,40 @@
     </div>
     <div class="forms4 forms">
         <form action="{% url 'register' %}" method="post">
-        {% csrf_token %}
-        <div class="arrow-header">
-            <span>ثبت نام (اطلاعات اولیه)</span>
-            <div class="arrow"></div>
-        </div>
-{#        <div class="form">#}
-{#            <input type="text" name="name" id="username4" autocomplete="off" required>#}
-{#            <label for="name" class="label-name">#}
-{#                <span class="content-name">نام کاربری</span>#}
-{#            </label>#}
-{#        </div>#}
-        {% for field in form2 %}
-                    <div class="form__field">
-                        <label for="formInput#confirm-password">{{ field.label }}</label>
-                        <small>{{ field }}</small>
-                        {% for error in field.errors.as_data %}
-                            <p style="color: red;">{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endfor %}
+            {% csrf_token %}
+            <div class="arrow-header">
+                <span>ثبت نام (اطلاعات اولیه)</span>
+                <div class="arrow"></div>
+            </div>
+            {#        <div class="form">#}
+            {#            <input type="text" name="name" id="username4" autocomplete="off" required>#}
+            {#            <label for="name" class="label-name">#}
+            {#                <span class="content-name">نام کاربری</span>#}
+            {#            </label>#}
+            {#        </div>#}
+            {% for field in form2 %}
+                <div class="form__field">
+                    <label for="formInput#confirm-password">{{ field.label }}</label>
+                    <small>{{ field }}</small>
+                    {% for error in field.errors.as_data %}
+                        <p style="color: red;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
 
-        <div class="forgot-div">
-            <a class="forgot-pass">
+            <div class="forgot-div">
+                <a class="forgot-pass">
 
-            </a>
-        </div>
-        <div class="btn-div">
-            <input class="btn btn--sub btn--lg btn-register" type="submit" value="ثبت نام"/>
-        </div>
-        <div class="btn-div">
-            <button class="btn-register" onclick="back4()">
-                بازگشت به قسمت ورود
-            </button>
-        </div>
+                </a>
+            </div>
+            <div class="btn-div">
+                <input class="btn btn--sub btn--lg btn-register" type="submit" value="ثبت نام"/>
+            </div>
+            <div class="btn-div">
+                <button class="btn-register" onclick="back4()">
+                    بازگشت به قسمت ورود
+                </button>
+            </div>
         </form>
     </div>
     <div class='forms01 forms mnforms'>
@@ -203,12 +203,11 @@
                     </div>
                 </div>
                 <div class="top-p">
-                    <div>
-                        <span id="fnamet">نام</span>
-                        <span id="lnamet">خانوادگی</span>
-                    </div>
-                    <span id="usert">کاربر</span></br>
-                    <span id="cmelt">نام کاربری</span>
+                    {% if request.user.is_authenticated %}
+                        <span id="cmelt">{{ request.user.username }}</span>
+                    {% else %}
+                        <span id="cmelt">نام کاربری</span>
+                    {% endif %}
                 </div>
             </div>
             <div class="bottom">
@@ -357,25 +356,7 @@
                             z
                         </div>
                     </form>
-                    <div class="form">
-                        <input type="text" name="name" id="code" autocomplete="username" required>
-                        <label for="name" class="label-name">
-                            <span class="content-name">y</span>
-                        </label>
-                    </div>
-                    <div class='select-div' style='display: inline-block;width: auto;font-size: 15px;' id='sub_func1'>
-                        <span class='select-span' id='zcnt1'> select </span>
-                        <select class='classic sp-select' id='z1-filter'>
-                            <option value='1'>op1</option>
-                            "
-                            <option value='2'>op2</option>
-                            "
-                            <option value='3'>op3</option>
-                            "
-                            <option value='4'>op4</option>
-                        </select>
-                    </div>
-                    <div class='incomp height' onclick='second_exam_plan(-1,0)'> ساخت آزمون کتبی</div>
+
                 </div>
                 <div class='caption-div'>
                     caption
