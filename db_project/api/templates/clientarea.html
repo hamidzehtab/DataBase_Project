@@ -204,7 +204,10 @@
                 </div>
                 <div class="top-p">
                     {% if request.user.is_authenticated %}
-                        <span id="cmelt">{{ request.user.username }}</span>
+                        {% for field in profile %}
+                        <span id="cmelt">{{ field }}</span>
+                            <br>
+                        {% endfor %}
                     {% else %}
                         <span id="cmelt">نام کاربری</span>
                     {% endif %}

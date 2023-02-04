@@ -44,9 +44,18 @@ def get_cart(request):
         columns.append(column[0])
     form = CustomUserCreationForm()
     form2 = CustomUserCreationForm2()
+    profile = []
+    if request.user.is_authenticated:
+        id = request.user.id
+        cursor.execute(f'SELECT * FROM tbl_users WHERE Id="{id}"')
+        result = cursor.fetchall()
+        profile.append(result[0][1])
+        profile.append(result[0][3])
+        profile.append(result[0][4])
+
     if request.user.is_authenticated and request.user.last_name == '1':
-        return render(request, 'clientarea.html', {'columns': columns, 'items': items, 'form': form, 'form2': form2})
-    return render(request, 'clientarea_user.html', {'columns': columns, 'items': items, 'form': form, 'form2': form2})
+        return render(request, 'clientarea.html', {'columns': columns, 'items': items, 'form': form, 'form2': form2, 'profile': profile})
+    return render(request, 'clientarea_user.html', {'columns': columns, 'items': items, 'form': form, 'form2': form2, 'profile': profile})
 
 def list_of_products(request):
     cursor = connection.cursor()
