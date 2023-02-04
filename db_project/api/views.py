@@ -5,25 +5,27 @@ from django.contrib.auth.hashers import make_password
 
 def index_page(request):
     cursor = connection.cursor()
-    cursor.execute('''Select concat(b.title," Code ",a.Id) as list_doreh 
-        from tbl_doreh a left join tbl_reshteh b on a.id_reshteh = b.Id; ''')
+    cursor.execute('''Select concat(b.title," Code ",a.id) as list_doreh 
+        from tbl_doreh a left join tbl_reshteh b on a.has_tbl_reshteh_id = b.Id; ''')
     items = cursor.fetchall()
     return render(request, 'index.html', {'items': items})
 
 
+def change_users(request):
+    cursor = connection.cursor()
+    username = request.POST['username']
+    first_name = request.POST['first_name']
+    last_name = request.POST['last_name']
+    ssid = request.POST['ssid']
+    password = ssid
+    phone_number = request.POST['phone_number']
+    level = request.POST['level']
+    cursor.execute(
+        f'''INSERT INTO users_customusers VALUES ("{username}","{first_name}","{last_name}","{password}","{ssid}","{phone_number}","{level}")''')
+    return redirect('get_cart')
+
 def get_cart(request):
     cursor = connection.cursor()
-    if request.method == 'POST':
-        username = request.POST['username']
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-        ssid = request.POST['ssid']
-        password = ssid
-        phone_number = request.POST['phone_number']
-        level = request.POST['level']
-        cursor.execute(
-            f'''INSERT INTO users_customusers VALUES ("3","{username}","{first_name}","{last_name}","{password}","{ssid}","{phone_number}","{level}")''')
-
     cursor.execute('SELECT * FROM tbl_cart;')
     items = cursor.fetchall()
     cursor.execute('''SHOW columns FROM tbl_cart;''')
@@ -293,7 +295,6 @@ def creating_products_by_admin(request):
 
 
 def updating_products_by_admin(request):
-    num = []
     if request.method == 'POST':
         code_doreh = request.POST['code_doreh']
         start_doreh = request.POST['start_doreh']
@@ -302,12 +303,18 @@ def updating_products_by_admin(request):
         closed = request.POST['closed']
         Id = request.POST['Id']
         cursor = connection.cursor()
-        cursor.execute(
-            f'''Update tbl_doreh a set a.code_doreh = "{code_doreh}", a.start_doreh= "{start_doreh}",
-            a.end_doreh = "{end_doreh}", a.fee= "{fee}", a.closed = "{closed}"
-            where Id="{Id}";
-        ''')
-        return redirect('get_cart')
+        cursor.execute(f'SELECT * FROM tbl_doreh WHERE Id="{Id}";')
+        result = cursor.fetchall()
+        if result:
+            cursor.execute(
+                f'''Update tbl_doreh a set a.id = "{code_doreh}", a.start_doreh= "{start_doreh}",
+                a.end_doreh = "{end_doreh}", a.fee_together= "{fee}", a.closed = "{closed}"
+                where Id="{Id}";
+            ''')
+            result = f'product with id {Id} updated successfully'
+        else:
+            result = f'no such product with id {Id}'
+        return render(request, 'update.html', {'result': result})
     return render(request, 'update.html')
 
 
@@ -315,7 +322,13 @@ def deleting_products_by_admin(request):
     if request.method == 'POST':
         id = request.POST['id']
         cursor = connection.cursor()
-        cursor.execute(
-            f'''Delete from tbl_doreh where Id={id} ;''')
-        return redirect('get_cart')
+        cursor.execute(f'SELECT * FROM tbl_doreh WHERE Id={id};')
+        result = cursor.fetchall()
+        if result:
+            cursor.execute(
+                f'''Delete from tbl_doreh where Id="{id}" ;''')
+            result = f'product with id {id} deleted successfully'
+        else:
+            result = f'no so such product with id {id}'
+        return render(request, 'delete.html', {'result': result})
     return render(request, 'delete.html')
