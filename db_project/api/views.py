@@ -294,7 +294,7 @@ def creating_products_by_admin(request):
         start_doreh = request.POST.get('start_doreh', False)
         id_reshteh = request.POST['id_reshteh']
         end_doreh = request.POST.get('end_doreh', False)
-        fee = request.POST.get('fee' , False)
+        fee = request.POST.get('fee', False)
         Id = request.POST.get('id_doreh', False)
         cursor = connection.cursor()
         cursor.execute(
@@ -303,14 +303,15 @@ def creating_products_by_admin(request):
         ''')
     return render(request, 'create.html')
 
+
 def updating_products_by_admin(request):
     if request.method == 'POST':
-        #id_reshteh = request.POST['id_reshteh']
+        # id_reshteh = request.POST['id_reshteh']
         start_doreh = request.POST.get('start_doreh', False)
         end_doreh = request.POST.get('end_doreh', False)
-        fee = request.POST.get('fee' , False)
-        #is_private = request.POST.get('is_private', False)
-        #closed = request.POST['closed']
+        fee = request.POST.get('fee', False)
+        # is_private = request.POST.get('is_private', False)
+        # closed = request.POST['closed']
         Id = request.POST.get('id_doreh', False)
         cursor = connection.cursor()
         cursor.execute(f'SELECT * FROM tbl_doreh WHERE Id="{Id}";')
@@ -345,22 +346,23 @@ def deleting_products_by_admin(request):
 
 def creating_users_by_admin(request):
     if request.method == 'POST':
-        Id = request.POST.get('Id_users', False)
-        username = request.POST.get('username', False)
-        password = request.POST.get('password', False)
-        fname = request.POST.get('fname', False)
-        lname = request.POST.get('lname', False)
-        phone = request.POST.get('phone', False)
-        codemelli = request.POST.get('codemelli', False)
-        city = request.POST.get('city', False)
-        email = request.POST.get('email', False)
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            print('registered')
+            Id = user.id
+            username = user.username
+            password = user.password
+            cursor = connection.cursor()
+            cursor.execute(
+                f'''Insert INTO tbl_users(id, username, password, active, state) VALUES ("{Id}", "{username}", "{password}", "1", "1");
+                                    ''')
+        return redirect('get_cart')
+    form = CustomUserCreationForm()
+    return render(request, 'create_users_by_admin.html', {'form': form})
 
-        cursor = connection.cursor()
-        cursor.execute(
-            f'''Insert into `tbl_users`(`Id`,`username`,`password`,`fname`,`lname`,`phone`,`codemeli`,`city`,`email`,`active`,`state`) 
-            values ("{Id}","{username}","{password}","{fname}","{lname}","{phone}","{codemelli}","{city}","{email}",1,1);
-        ''')
-    return render(request, 'create_users_by_admin.html')
 
 def updating_users_by_admin(request):
     if request.method == 'POST':

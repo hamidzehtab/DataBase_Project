@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.db import connection
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm
 
@@ -40,6 +41,19 @@ def register_user(request):
         user.last_name = '0'
         user.save()
         print('registered')
+        Id = user.id
+        username = user.username
+        password = user.password
+        fname = 'None'
+        lname = 'None'
+        phone = 0
+        codemelli = 0
+        city = 'None'
+        email = 'None'
+        cursor = connection.cursor()
+        cursor.execute(
+            f'''Insert INTO tbl_users(id, username, password, active, state) VALUES ("{Id}", "{username}", "{password}", "1", "1");
+                            ''')
     return redirect('get_cart')
 
 
