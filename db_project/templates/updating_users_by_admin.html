@@ -18,67 +18,79 @@
 
 </head>
 <body>
-<div class="login">
-    <div class="forms8 forms">
-        <form action="{% url 'login' %}" method="post">
-            {% csrf_token %}
+    <div class="login">
+        <div class="forms8 forms">
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <div class="arrow-header">
+                    <span>ورود به سامانه</span>
+                    <div class="arrow"></div>
+                </div>
+                <div class="form">
+                    <input type="text" name="username" id="code" autocomplete="username" required>
+                    <label for="name" class="label-name">
+                        <span class="content-name">نام کاربری یا شماره موبایل</span>
+                    </label>
+                </div>
+                <div class="form">
+                    <input type="password" name="password" id="pass" autocomplete="off" required>
+                    <label for="pass" class="label-name">
+                        <span class="content-name">رمز عبور</span>
+                    </label>
+                </div>
+                <div class="forgot-div">
+                    <a class="forgot-pass" onclick="forgot()">
+    
+                    </a>
+                </div>
+                <div class="btn-div">
+                    <input class="btn btn--sub btn--lg btn-login" type="submit" value="ورود"/>
+                </div>
+                <div class="btn-div">
+                    <button class="btn-register" onclick="back1()">
+                        ثبت نام
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="forms4 forms">
             <div class="arrow-header">
-                <span>ورود به سامانه</span>
+                <span>ثبت نام (اطلاعات اولیه)</span>
                 <div class="arrow"></div>
             </div>
             <div class="form">
-                <input type="text" name="username" id="code" autocomplete="username" required>
+                <input type="text" name="name" id="username4" autocomplete="off" required>
                 <label for="name" class="label-name">
                     <span class="content-name">نام کاربری</span>
                 </label>
             </div>
             <div class="form">
-                <input type="password" name="password" id="pass" autocomplete="off" required>
+                <input type="text" id="name4" autocomplete="off" required>
+                <label class="label-name">
+                    <span class="content-name">نام</span>
+                </label>
+            </div>
+            <div class="form">
+                <input type="text" id="lname4" autocomplete="off" required>
+                <label class="label-name">
+                    <span class="content-name">نام خانوادگی</span>
+                </label>
+            </div>
+            <div class="form">
+                <input type="password" name="pass" id="pass4" autocomplete="off" required>
                 <label for="pass" class="label-name">
                     <span class="content-name">رمز عبور</span>
                 </label>
             </div>
-            <div class="forgot-div">
-                <a class="forgot-pass" onclick="forgot()">
-
-                </a>
+            <div class="form">
+                <input type="password" name="pass" id="tpass4" autocomplete="off" required>
+                <label for="pass" class="label-name">
+                    <span class="content-name">تکرار رمز عبور</span>
+                </label>
             </div>
-            <div class="btn-div">
-                <input class="btn btn--sub btn--lg btn-login" type="submit" value="ورود"/>
-            </div>
-            <div class="btn-div">
-                <button class="btn-register" onclick="back1()">
-                    ثبت نام
-                </button>
-            </div>
-        </form>
-    </div>
-    <div class="forms4 forms">
-        <form action="{% url 'register' %}" method="post">
-            {% csrf_token %}
-            <div class="arrow-header">
-                <span>ثبت نام (اطلاعات اولیه)</span>
-                <div class="arrow"></div>
-            </div>
-            {#        <div class="form">#}
-            {#            <input type="text" name="name" id="username4" autocomplete="off" required>#}
-            {#            <label for="name" class="label-name">#}
-            {#                <span class="content-name">نام کاربری</span>#}
-            {#            </label>#}
-            {#        </div>#}
-            {% for field in form2 %}
-                <div class="form__field">
-                    <label for="formInput#confirm-password">{{ field.label }}</label>
-                    <small>{{ field }}</small>
-                    {% for error in field.errors.as_data %}
-                        <p style="color: red;">{{ error }}</p>
-                    {% endfor %}
-                </div>
-            {% endfor %}
-
             <div class="forgot-div">
                 <a class="forgot-pass">
-
+    
                 </a>
             </div>
             <div class="btn-div">
@@ -89,54 +101,74 @@
                     بازگشت به قسمت ورود
                 </button>
             </div>
-        </form>
-    </div>
-    <div class='forms01 forms mnforms'>
-        <div class='arrow-header'>
-            <span class='before-h'><i class='fa fa-user' aria-hidden='true'></i> جست و جو کاربر </span>
-            <div class='arrow'></div>
         </div>
-        <div class='inform-div'>
-            <a class='inform-p before-p'>
-            </a>
-        </div>
-
-        <form action="{% url 'change_users' %}" method="post" id="custom">
-            {% csrf_token %}
-            <div class='row-modal' style='margin:5px 0;'>
-
-                {#                    <div class='form' style='display:inline-block;margin-left:2%;'>#}
-                {#                        <input name='username' type='text' id='inpmod1' onkeyup='search_user_div()' autocomplete='off' required>#}
-                {#                        <label class='label-name'>#}
-                {#                            <span class='content-name'>نام کاربری</span>#}
-                {#                        </label>#}
-                {#                    </div>#}
-                {% for field in form %}
-                    <div class="form__field">
-                        <label for="formInput#confirm-password">{{ field.label }}</label>
-                        <small>{{ field }}</small>
-                        {% for error in field.errors.as_data %}
-                            <p style="color: red;">{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endfor %}
-
-                <div class="incomp height">
-                    <input style="border:0px;background-color:transparent;padding: 0px;" type="submit" value="جدید">
-                </div>
+        <div class='forms01 forms mnforms'>
+            <div class='arrow-header'>
+                <span class='before-h'><i class='fa fa-user' aria-hidden='true'></i> جست و جو کاربر </span>
+                <div class='arrow'></div>
             </div>
-
-        </form>
-        </br>
-        <div id='search_user_div'></div>
-        <div class='forgot-div'>
-            <a class='forgot-pass' onclick='forgot()'>
-            </a>
+            <div class='inform-div'>
+                <a class='inform-p before-p'>
+                </a>
+            </div>
+    
+            <form action="" method="post" id="custom">
+                {% csrf_token %}
+                <div class='row-modal' style='margin:5px 0;'>
+    
+                    <div class='form' style='display:inline-block;margin-left:2%;'>
+                        <input name='username' type='text' id='inpmod1' onkeyup='search_user_div()' autocomplete='off' required>
+                        <label class='label-name'>
+                            <span class='content-name'>نام کاربری</span>
+                        </label>
+                    </div>
+                    <div class='form' style='display:inline-block;margin-left:2%;'>
+                        <input name='first_name' type='text' id='inpmod2' onkeyup='search_user_div()' autocomplete='off' required>
+                        <label class='label-name'>
+                            <span class='content-name'>نام</span>
+                        </label>
+                    </div>
+                    <div class='form' style='display:inline-block;margin-left:2%;'>
+                        <input name='last_name' type='text' id='inpmod3' onkeyup='search_user_div()' autocomplete='off' required>
+                        <label class='label-name'>
+                            <span class='content-name'>نام خانوادگی</span>
+                        </label>
+                    </div>
+                    <div class='form' style='display:inline-block;margin-left:2%;'>
+                        <input name='ssid' type='number' id='inpmod4' onkeyup='search_user_div()' autocomplete='off' required>
+                        <label class='label-name'>
+                            <span class='content-name'>کد ملی</span>
+                        </label>
+                    </div>
+                    <div class='form' style='display:inline-block;margin-left:2%;'>
+                        <input name='phone_number' type='number' id='inpmod5' onkeyup='search_user_div()' autocomplete='off' required>
+                        <label class='label-name'>
+                            <span class='content-name'>شماره تلفن</span>
+                        </label>
+                    </div>
+                    <div class='select-div' style='margin:0 2px 0 7px;'><span class='select-span'> سطح دسترسی </span>
+                        <select form="custom" name="level" class='classic sp-select' id='inpmod6' onchange='search_user_div()'>
+                        <option value='0'>...</option>
+                        <option value='1'>کاربر</option>
+                        <option value='2'>ادمین</option>
+                    </select>
+                    </div>
+                    <div class="incomp height">
+                        <input style="border:0px;background-color:transparent;padding: 0px;" type="submit" value="جدید">
+                    </div>
+                </div>
+    
+            </form>
+            </br>
+            <div id='search_user_div'></div>
+            <div class='forgot-div'>
+                <a class='forgot-pass' onclick='forgot()'>
+                </a>
+            </div>
         </div>
+        <a class="close-login" href="#"><i class="fa fa-times "></i></a>
+    
     </div>
-    <a class="close-login" href="#"><i class="fa fa-times "></i></a>
-
-</div>
 <div class="alert-box hidden">
     <span id="alert-value">نام کاربری یا  رمز عبور اشتباه است 	</span>
     <span class="close-alert" onclick="close_it()"> &times; </span>
@@ -203,11 +235,12 @@
                     </div>
                 </div>
                 <div class="top-p">
-                    {% if request.user.is_authenticated %}
-                        <span id="cmelt">{{ request.user.username }}</span>
-                    {% else %}
-                        <span id="cmelt">نام کاربری</span>
-                    {% endif %}
+                    <div>
+                        <span id="fnamet">نام</span>
+                        <span id="lnamet">خانوادگی</span>
+                    </div>
+                    <span id="usert">کاربر</span></br>
+                    <span id="cmelt">نام کاربری</span>
                 </div>
             </div>
             <div class="bottom">
@@ -245,6 +278,7 @@
                                     شهر</a></li>
                                 <li class="content-li" onclick=""><a href="creating_users_by_admin">ساخت کاربر جدید</a></li>
                                 <li class="content-li" onclick=""><a href="updating_users_by_admin">ویرایش کاربران</a></li>
+
                             </ul>
                         </div>
                     </details>
@@ -257,26 +291,20 @@
                         </summary>
                         <div class="content">
                             <ul>
-                                <li>
+                                <li >
                                     <ul>
                                         <li>
-                                            <details style="margin-right:-25px">
-                                                <summary
-                                                        style="direction:rtl;padding:6px;background-color:#2D3456;color:gray">
+                                            <details style="margin-right:-25px" >
+                                                <summary style="direction:rtl;padding:6px;background-color:#2D3456;color:gray">
                                                     <div style="margin-right:20px;margin-top:-22px">
                                                         تعریف
                                                     </div>
                                                 </summary>
-                                                <div class="content"
-                                                     style="background-color:#2F3637;box-shadow:0px 0px 0px;">
-                                                    <ul class="sub-sub-ul"
-                                                        style="padding-right:15px;border-right:0px solid gray;">
-                                                        <li class="content-li" onclick=""><a
-                                                                href="creating_products_by_admin">اضافه کردن</a></li>
-                                                        <li class="content-li" onclick=""><a
-                                                                href="updating_products_by_admin">ویرایش</a></li>
-                                                        <li class="content-li" onclick=""><a
-                                                                href="deleting_products_by_admin">حذف</a></li>
+                                                <div class="content" style="background-color:#2F3637;box-shadow:0px 0px 0px;" >
+                                                    <ul class="sub-sub-ul" style="padding-right:15px;border-right:0px solid gray;">
+                                                        <li class="content-li" onclick=""><a href="creating_products_by_admin">اضافه کردن</a> </li>
+                                                        <li class="content-li" onclick=""><a href="updating_products_by_admin">ویرایش</a></li>
+                                                        <li class="content-li" onclick=""><a href="deleting_products_by_admin">حذف</a></li>
                                                     </ul>
                                                 </div>
                                             </details>
@@ -293,8 +321,6 @@
                                 </li>
                                 <li class="content-li" onclick=""><a href="list_of_sale_for_agiven_product_admin">فروش
                                     در ماه</a></li>
-
-
                             </ul>
                         </div>
                     </details>
@@ -343,50 +369,68 @@
         </div>
         <div class="main fix-background animate__animated animate__faster">
             <div class="null-div">
-                <div class="dash-div">
-
-                    <form action="" style="display: flex; background-color: lightblue;padding:10px;" method="post"
+                <form action="" style="display: flex; background-color: lightblue;padding:10px;" method="post"
                           style="display:flex;">
                         {% csrf_token %}
                         <div class="form" style="margin-left:10px;">
-                            <input type="text" name="input" id="code">
-                            <label for="name" class="label-name">
-                                <span class="content-name">hellohere</span>
+                            <input type="text" name="Id_users" id="Id">
+                            <label for="id" class="label-name">
+                                <span class="content-name">آیدی کاربر</span>
+                            </label>
+                        </div>
+                        <div class="form" style="margin-left:10px;">
+                            <input type="text" name="username" id="id_reshteh">
+                            <label for="id_reshteh" class="label-name">
+                                <span class="content-name">نام کاربری</span>
+                            </label>
+                        </div>
+                        <div class="form" style="margin-left:10px;">
+                            <input type="text" name="password" id="start_doreh">
+                            <label for="start_doreh" class="label-name">
+                                <span class="content-name">رمز عبور</span>
+                            </label>
+                        </div>
+                        <div class="form" style="margin-left:10px;">
+                            <input type="text" name="fname" id="end_doreh">
+                            <label for="end_doreh" class="label-name">
+                                <span class="content-name">اسم </span>
+                            </label>
+                        </div>
+                        <div class="form" style="margin-left:10px;">
+                            <input type="text" name="lname" id="fee">
+                            <label for="fee" class="label-name">
+                                <span class="content-name">نام خانوادگی </span>
+                            </label>
+                        </div>
+                        <div class="form" style="margin-left:10px;">
+                            <input type="text" name="Id_users" id="start_doreh">
+                            <label for="start_doreh" class="label-name">
+                                <span class="content-name">شماره تماس</span>
+                            </label>
+                        </div>
+                        <div class="form" style="margin-left:10px;">
+                            <input type="text" name="codemelli" id="start_doreh">
+                            <label for="start_doreh" class="label-name">
+                                <span class="content-name">کد ملی</span>
+                            </label>
+                        </div>
+                        <div class="form" style="margin-left:10px;">
+                            <input type="text" name="city" id="start_doreh">
+                            <label for="start_doreh" class="label-name">
+                                <span class="content-name">شهر</span>
+                            </label>
+                        </div>
+                        <div class="form" style="margin-left:10px;">
+                            <input type="text" name="email" id="start_doreh">
+                            <label for="start_doreh" class="label-name">
+                                <span class="content-name">ایمیل</span>
                             </label>
                         </div>
                         <div class="incomp height">
                             <input style="border:0px;background-color:transparent;padding: 0px;" type="submit"
-                                   value="enter">
-                            z
+                                   value="update">
                         </div>
-                    </form>
-
-                </div>
-                <div class='caption-div'>
-                    caption
-                    <input type='text' id='search_input_all' onkeyup='FilterkeyWord_all_table()' placeholder='جستجو...'>
-
-                </div>
-                <table class='table-specific filter'>
-                    <thead>
-                    <tr>
-                        {% for column in columns %}
-                            <th>{{ column }}</th>
-                        {% endfor %}
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for item in items %}
-                        <tr>
-                            {% for element in item %}
-                                <td data-label='{{ column }}' class='sepr'>
-                                    {{ element }}
-                                </td>
-                            {% endfor %}
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                </form>
             </div>
         </div>
     </div>
