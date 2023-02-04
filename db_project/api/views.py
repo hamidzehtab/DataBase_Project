@@ -360,27 +360,29 @@ def creating_users_by_admin(request):
             f'''Insert into `tbl_users`(`Id`,`username`,`password`,`fname`,`lname`,`phone`,`codemelli`,`city`,`email`) 
             values ("{Id}","{username}","{password}","{fname}","{lname}","{phone}","{codemelli}","{city}","{email}");
         ''')
-    return render(request, 'create.html')
+    return render(request, 'create_users_by_admin.html')
 
 def updating_users_by_admin(request):
     if request.method == 'POST':
-        #id_reshteh = request.POST['id_reshteh']
-        start_doreh = request.POST.get('start_doreh', False)
-        end_doreh = request.POST.get('end_doreh', False)
-        fee = request.POST.get('fee' , False)
-        #is_private = request.POST.get('is_private', False)
-        #closed = request.POST['closed']
-        Id = request.POST.get('id_doreh', False)
+        Id = request.POST.get('Id_users', False)
+        username = request.POST.get('username', False)
+        password = request.POST.get('password', False)
+        fname = request.POST.get('fname', False)
+        lname = request.POST.get('lname', False)
+        phone = request.POST.get('Id_users', False)
+        codemelli = request.POST.get('codemelli', False)
+        city = request.POST.get('city', False)
+        email = request.POST.get('email', False)
         cursor = connection.cursor()
-        cursor.execute(f'SELECT * FROM tbl_doreh WHERE Id="{Id}";')
+        cursor.execute(f'SELECT * FROM tbl_users WHERE Id="{Id}";')
         result = cursor.fetchall()
         if result:
             cursor.execute(
-                f'''Update tbl_doreh a set a.Id = "{Id}", a.start_doreh= "{start_doreh}",
-                a.end_doreh = "{end_doreh}", a.fee_together= "{fee}" where Id="{Id}";
+                f'''Update tbl_users a set a.Id = "{Id}", a.username= "{username}",
+                a.password = "{password}", a.fname= "{fname}" , a.lname= "{lname}", a.phone= "{phone}", a.codemelli= "{codemelli}", a.city= "{city}", a.email= "{email}" where Id="{Id}";
             ''')
-            result = f'product with id {Id} updated successfully'
+            result = f'user with id {Id} updated successfully'
         else:
-            result = f'no such product with id {Id}'
-        return render(request, 'update.html', {'result': result})
-    return render(request, 'update.html')
+            result = f'no such user with id {Id}'
+        return render(request, 'updating_users_by_admin.html', {'result': result})
+    return render(request, 'updating_users_by_admin.html')
