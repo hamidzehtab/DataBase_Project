@@ -196,15 +196,15 @@ function show(vr,b=1) {
     function back1() {
         state = 1;
         $('.forms4').slideDown();
-        $('.forms1').fadeOut();
+        $('.forms8').fadeOut();
         hide();
         alertBox.classList.add("hidden");
         $('input[type=text]').val("");
     }
     function back4() {
         state = 1;
-        $('.forms4').slideDown();
-        $('.forms1').fadeOut();
+        $('.forms8').slideDown();
+        $('.forms4').fadeOut();
         hide();
         alertBox.classList.add("hidden");
         $('input[type=text]').val("");
