@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import make_password
 def index_page(request):
     cursor = connection.cursor()
     cursor.execute('''Select concat(b.title," Code ",a.id) as list_doreh 
-        from tbl_doreh a left join tbl_reshteh b on a.has_tbl_reshteh_id = b.Id; ''')
+        from tbl_doreh a left join tbl_reshteh b on a.id_reshteh = b.Id; ''')
     items = cursor.fetchall()
     return render(request, 'index.html', {'items': items})
 
@@ -307,7 +307,7 @@ def updating_products_by_admin(request):
         result = cursor.fetchall()
         if result:
             cursor.execute(
-                f'''Update tbl_doreh a set a.id = "{code_doreh}", a.start_doreh= "{start_doreh}",
+                f'''Update tbl_doreh a set a.Id = "{code_doreh}", a.start_doreh= "{start_doreh}",
                 a.end_doreh = "{end_doreh}", a.fee_together= "{fee}", a.closed = "{closed}"
                 where Id="{Id}";
             ''')
