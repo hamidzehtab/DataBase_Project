@@ -301,7 +301,7 @@ def creating_products_by_admin(request):
             f'''Insert into tbl_doreh(`Id`,`id_reshteh`,`start_doreh`,`end_doreh`,`fee`) 
                 values ("{Id}","{id_reshteh}","{start_doreh}","{end_doreh}","{fee}");
         ''')
-    return render(request, 'update.html')
+    return render(request, 'create.html')
 
 def updating_products_by_admin(request):
     if request.method == 'POST':
