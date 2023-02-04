@@ -296,20 +296,20 @@ def creating_products_by_admin(request):
 
 def updating_products_by_admin(request):
     if request.method == 'POST':
-        id_reshteh = request.POST['id_reshteh']
-        start_doreh = request.POST['start_doreh']
-        end_doreh = request.POST['end_doreh']
-        fee = request.POST['fee']
-        closed = request.POST['closed']
-        Id = request.POST['Id']
+        #id_reshteh = request.POST['id_reshteh']
+        start_doreh = request.POST.get('start_doreh', False)
+        end_doreh = request.POST.get('end_doreh', False)
+        fee = request.POST.get('fee' , False)
+        #is_private = request.POST.get('is_private', False)
+        #closed = request.POST['closed']
+        Id = request.POST.get('id_doreh', False)
         cursor = connection.cursor()
         cursor.execute(f'SELECT * FROM tbl_doreh WHERE Id="{Id}";')
         result = cursor.fetchall()
         if result:
             cursor.execute(
-                f'''Update tbl_doreh a set a.Id = "{Id}",a.id_reshteh = "{id_reshteh}" , a.start_doreh= "{start_doreh}",
-                a.end_doreh = "{end_doreh}", a.fee_together= "{fee}", a.closed = "{closed}"
-                where Id="{Id}";
+                f'''Update tbl_doreh a set a.Id = "{Id}", a.start_doreh= "{start_doreh}",
+                a.end_doreh = "{end_doreh}", a.fee_together= "{fee}" where Id="{Id}";
             ''')
             result = f'product with id {Id} updated successfully'
         else:
