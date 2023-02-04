@@ -7,7 +7,7 @@ from .forms import CustomUserCreationForm, CustomUserCreationForm2
 def index_page(request):
     cursor = connection.cursor()
     cursor.execute('''Select concat(b.title," Code ",a.id) as list_doreh 
-        from tbl_doreh a left join tbl_reshteh b on a.id_reshteh = b.Id; ''')
+        from tbl_doreh a left join tbl_reshteh b on a.has_tbl_reshteh_id = b.Id; ''')
     items = cursor.fetchall()
     return render(request, 'index.html', {'items': items})
 
@@ -44,69 +44,98 @@ def get_cart(request):
         columns.append(column[0])
     form = CustomUserCreationForm()
     form2 = CustomUserCreationForm2()
-    return render(request, 'clientarea.html', {'columns': columns, 'items': items, 'form': form, 'form2': form2})
-
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html', {'columns': columns, 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html', {'columns': columns, 'items': items, 'form': form, 'form2': form2})
 
 def list_of_products(request):
     cursor = connection.cursor()
     cursor.execute('''Select concat(b.title," Code ",a.Id) as list_doreh 
     from tbl_doreh a left join tbl_reshteh b on a.id_reshteh = b.Id; ''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['list_doreh'], 'items': items})
-
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html', {'columns': ['list_doreh'], 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html', {'columns': ['list_doreh'], 'items': items, 'form': form, 'form2': form2})
 
 def list_of_users(request):
     cursor = connection.cursor()
     cursor.execute('Select concat(fname," ",lname) as names from tbl_user; ')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['names'], 'items': items})
-
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html', {'columns': ['names'], 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html', {'columns': ['names'], 'items': items, 'form': form, 'form2': form2})
 
 def list_of_product_types(request):
     cursor = connection.cursor()
     cursor.execute('Select title from tbl_reshteh; ')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['title'], 'items': items})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html', {'columns': ['title'], 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html', {'columns': ['title'], 'items': items, 'form': form, 'form2': form2})
 
 
 def list_of_orders(request):
     cursor = connection.cursor()
     cursor.execute(
         '''Select d.Title,concat(b.fname," ",b.lname) as name,a.date_buy
-         from tbl_buy_doreh a left join tbl_users b on a.id_username = b.Id left join tbl_doreh c on a.id_doreh = c.Id
+         from tbl_buy_doreh a left join tbl_user b on a.id_username = b.Id left join tbl_doreh c on a.id_doreh = c.Id
           left join tbl_reshteh d on d.Id = c.id_reshteh ; ''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['title', 'name', 'date'], 'items': items})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html', {'columns': ['title', 'name', 'date'], 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html',
+                  {'columns': ['title', 'name', 'date'], 'items': items, 'form': form, 'form2': form2})
 
 
 def list_of_top_10_users_all(request):
     cursor = connection.cursor()
     cursor.execute(
         '''Select count(*) as num_buy, a.id_username , concat(b.fname," ",b.lname) as name
-         from tbl_buy_doreh a left join tbl_users b on a.id_username = b.Id 
+         from tbl_buy_doreh a left join tbl_user b on a.id_username = b.Id 
          group by a.id_username order by count(*) desc Limit 10 ; ''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['num_buy', 'id_username', 'name'], 'items': items})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html', {'columns': ['num_buy', 'id_username', 'name'], 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html',
+                  {'columns': ['num_buy', 'id_username', 'name'], 'items': items, 'form': form, 'form2': form2})
 
 
 def list_of_top_10_users_month(request):
     cursor = connection.cursor()
     cursor.execute(
         '''Select count(*) as num_buy, a.id_username , concat(b.fname," ",b.lname) as name
-         from tbl_buy_doreh a left join tbl_users b on a.id_username = b.Id where a.date_buy >= DATE(NOW() - INTERVAL 1 Month)
+         from tbl_buy_doreh a left join tbl_user b on a.id_username = b.Id where a.date_buy >= DATE(NOW() - INTERVAL 1 Month)
           group by a.id_username order by count(*) desc Limit 10 ;''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['num_buy', 'id_username', 'name'], 'items': items})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html', {'columns': ['num_buy', 'id_username', 'name'], 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html', {'columns': ['num_buy', 'id_username', 'name'], 'items': items, 'form': form, 'form2': form2})
 
 
 def list_of_top_10_users_week(request):
     cursor = connection.cursor()
     cursor.execute(
         '''Select count(*) as num_buy, a.id_username , concat(b.fname," ",b.lname) as name
-         from tbl_buy_doreh a left join tbl_users b on a.id_username = b.Id where a.date_buy >= DATE(NOW() - INTERVAL 7 DAY
+         from tbl_buy_doreh a left join tbl_user b on a.id_username = b.Id where a.date_buy >= DATE(NOW() - INTERVAL 7 DAY
           group by a.id_username order by count(*) desc Limit 10 ;''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['num_buy', 'id_username', 'name'], 'items': items})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html', {'columns': ['num_buy', 'id_username', 'name'], 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html', {'columns': ['num_buy', 'id_username', 'name'], 'items': items, 'form': form, 'form2': form2})
 
 
 def list_of_top_sold_product_week(request):
@@ -116,7 +145,11 @@ def list_of_top_sold_product_week(request):
         from tbl_buy_doreh a left join tbl_doreh b on a.id_doreh = b.Id left join tbl_reshteh c on c.Id = b.id_reshteh
          where a.date_buy >= DATE(NOW() - INTERVAL 7 Day) group by a.id_doreh order by count(*) desc;''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['times_bought', 'Title'], 'items': items})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html', {'columns': ['times_bought', 'Title'], 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html', {'columns': ['times_bought', 'Title'], 'items': items, 'form': form, 'form2': form2})
 
 
 def list_of_top_sold_procut_month(request):
@@ -126,7 +159,11 @@ def list_of_top_sold_procut_month(request):
          left join tbl_reshteh c on c.Id = b.id_reshteh where a.date_buy >= DATE(NOW() - INTERVAL 1 Month)
           group by a.id_doreh order by count(*) desc; ''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['times_bought', 'Title'], 'items': items})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html', {'columns': ['times_bought', 'Title'], 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html', {'columns': ['times_bought', 'Title'], 'items': items, 'form': form, 'form2': form2})
 
 
 def list_of_special_offers(request):
@@ -136,7 +173,11 @@ def list_of_special_offers(request):
         from tbl_discount a left join tbl_doreh b on a.specific_doreh = b.Id 
         left join tbl_reshteh c on c.Id = b.id_reshteh where a.percent_discount >= 15 ;''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['title', 'off_percentage'], 'items': items})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html', {'columns': ['title', 'off_percentage'], 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html', {'columns': ['title', 'off_percentage'], 'items': items, 'form': form, 'form2': form2})
 
 
 def list_of_providersof_product_admin(request):
@@ -145,7 +186,11 @@ def list_of_providersof_product_admin(request):
         '''Select concat(a.Id," name ",c.title," offered by ",b.name) as offerd_by
          from tbl_doreh a left join tbl_institute b on a.Id = b.id_doreh left join tbl_reshteh c on a.id_reshteh = c.Title;''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html', {'columns': ['offerd_by'], 'items': items, 'form': form, 'form2': form2})
 
 
 def list_of_providersof_product_admin_2(request):
@@ -155,7 +200,11 @@ def list_of_providersof_product_admin_2(request):
          from tbl_institute b left join tbl_doreh a on a.Id = b.id_doreh left join tbl_reshteh c on a.id_reshteh = c.Title
          where c.Id = '';''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html', {'columns': ['offerd_by'], 'items': items, 'form': form, 'form2': form2})
 
 
 def list_of_cheapest_providerof_products_admin(request):
@@ -165,7 +214,11 @@ def list_of_cheapest_providerof_products_admin(request):
          from tbl_institute b left join tbl_doreh a on a.Id = b.id_doreh left join tbl_reshteh c on a.id_reshteh = c.Title
           where c.Id = '' order by a.fee desc LIMIT 1;''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html', {'columns': ['offerd_by'], 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html', {'columns': ['offerd_by'], 'items': items, 'form': form, 'form2': form2})
 
 
 def list_of_last_10_orders_of_user(request):
@@ -174,22 +227,28 @@ def list_of_last_10_orders_of_user(request):
         num = request.POST['input']
     cursor = connection.cursor()
     cursor.execute(
-        f'''Select * from tbl_buy_doreh a left join tbl_users b on a.id_username = b.Id 
+        f'''Select * from tbl_buy_doreh a left join tbl_user b on a.id_username = b.Id 
         where a.id_username={num} order by a.date_buy desc limit 10; ''')
     items = cursor.fetchall()
     cursor.execute('''SHOW columns FROM tbl_buy_doreh;''')
     columns = []
     for column in cursor.fetchall():
         columns.append(column[0])
-    cursor.execute('''SHOW columns FROM tbl_users;''')
+    cursor.execute('''SHOW columns FROM tbl_user;''')
     for column in cursor.fetchall():
         columns.append(column[0])
     columns.append('input')
     items = list(items)
     for i in range(len(items)):
         items[i] = items[i][0:5]
-    return render(request, 'clientarea.html',
-                  {'columns': ['Id', 'id_doreh', 'date_buy', 'id_username', 'fee'], 'items': items})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html',
+                  {'columns': ['Id', 'id_doreh', 'date_buy', 'id_username', 'fee'], 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html',
+                  {'columns': ['Id', 'id_doreh', 'date_buy', 'id_username', 'fee'], 'items': items, 'form': form,
+                   'form2': form2})
 
 
 def list_of_comments_for_agiven_product(request):
@@ -204,7 +263,11 @@ def list_of_comments_for_agiven_product(request):
     columns = []
     for column in cursor.fetchall():
         columns.append(column[0])
-    return render(request, 'clientarea.html', {'columns': columns, 'items': items})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html', {'columns': columns, 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html', {'columns': columns, 'items': items, 'form': form, 'form2': form2})
 
 
 def list_of_top3_best_comments_for_agiven_product(request):
@@ -219,7 +282,11 @@ def list_of_top3_best_comments_for_agiven_product(request):
     columns = []
     for column in cursor.fetchall():
         columns.append(column[0])
-    return render(request, 'clientarea.html', {'columns': columns, 'items': items})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html', {'columns': columns, 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html', {'columns': columns, 'items': items, 'form': form, 'form2': form2})
 
 
 def list_of_top3_worst_comments_for_agiven_product(request):
@@ -234,7 +301,11 @@ def list_of_top3_worst_comments_for_agiven_product(request):
     columns = []
     for column in cursor.fetchall():
         columns.append(column[0])
-    return render(request, 'clientarea.html', {'columns': columns, 'items': items})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html', {'columns': columns, 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html', {'columns': columns, 'items': items, 'form': form, 'form2': form2})
 
 
 def list_of_sale_for_agiven_product_admin(request):
@@ -245,7 +316,11 @@ def list_of_sale_for_agiven_product_admin(request):
     cursor.execute(
         '''select Id,count(*) as buy_number from tbl_buy_doreh group by Id; ''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['Id', 'sale'], 'items': items})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html', {'columns': ['Id', 'sale'], 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html', {'columns': ['Id', 'sale'], 'items': items, 'form': form, 'form2': form2})
 
 
 def list_of_average_sale_for_store_admin(request):
@@ -256,7 +331,12 @@ def list_of_average_sale_for_store_admin(request):
     cursor.execute(
         '''select avg(fee),month(date_buy),year(date_buy) from tbl_buy_doreh group by month(date_buy),year(date_buy);''')
     items = cursor.fetchall()
-    return render(request, 'clientarea.html', {'columns': ['average', 'month', 'year'], 'items': items})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html', {'columns': ['average', 'month', 'year'], 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html',
+                  {'columns': ['average', 'month', 'year'], 'items': items, 'form': form, 'form2': form2})
 
 
 def list_of_users_of_givencity_admin(request):
@@ -265,13 +345,17 @@ def list_of_users_of_givencity_admin(request):
         num = request.POST['input']
     cursor = connection.cursor()
     cursor.execute(
-        '''select * from tbl_users group by city;''')
+        '''select * from tbl_user group by city;''')
     items = cursor.fetchall()
-    cursor.execute('''SHOW columns FROM tbl_users;''')
+    cursor.execute('''SHOW columns FROM tbl_user;''')
     columns = []
     for column in cursor.fetchall():
         columns.append(column[0])
-    return render(request, 'clientarea.html', {'columns': columns, 'items': items})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html', {'columns': columns, 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html', {'columns': columns, 'items': items, 'form': form, 'form2': form2})
 
 
 def list_of_providers_agiven_city_admin(request):
@@ -286,7 +370,11 @@ def list_of_providers_agiven_city_admin(request):
     columns = []
     for column in cursor.fetchall():
         columns.append(column[0])
-    return render(request, 'clientarea.html', {'columns': columns, 'items': items})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    if request.user.is_authenticated and request.user.last_name == '1':
+        return render(request, 'clientarea.html', {'columns': columns, 'items': items, 'form': form, 'form2': form2})
+    return render(request, 'clientarea_user.html', {'columns': columns, 'items': items, 'form': form, 'form2': form2})
 
 
 def creating_products_by_admin(request):
@@ -301,6 +389,8 @@ def creating_products_by_admin(request):
             f'''Insert into tbl_doreh(`Id`,`id_reshteh`,`start_doreh`,`end_doreh`,`fee`) 
                 values ("{Id}","{id_reshteh}","{start_doreh}","{end_doreh}","{fee}");
         ''')
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
     return render(request, 'create.html')
 
 def updating_products_by_admin(request):
@@ -323,7 +413,11 @@ def updating_products_by_admin(request):
             result = f'product with id {Id} updated successfully'
         else:
             result = f'no such product with id {Id}'
+        form = CustomUserCreationForm()
+        form2 = CustomUserCreationForm2()
         return render(request, 'update.html', {'result': result})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
     return render(request, 'update.html')
 
 
@@ -339,9 +433,12 @@ def deleting_products_by_admin(request):
             result = f'product with id {id} deleted successfully'
         else:
             result = f'no so such product with id {id}'
+        form = CustomUserCreationForm()
+        form2 = CustomUserCreationForm2()
         return render(request, 'delete.html', {'result': result})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
     return render(request, 'delete.html')
-
 
 def creating_users_by_admin(request):
     if request.method == 'POST':
