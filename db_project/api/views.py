@@ -70,7 +70,7 @@ def list_of_products(request):
 
 def list_of_users(request):
     cursor = connection.cursor()
-    cursor.execute('Select concat(fname," ",lname) as names from tbl_user; ')
+    cursor.execute('Select concat(fname," ",lname) as names from tbl_users; ')
     items = cursor.fetchall()
     form = CustomUserCreationForm()
     form2 = CustomUserCreationForm2()
@@ -93,7 +93,7 @@ def list_of_orders(request):
     cursor = connection.cursor()
     cursor.execute(
         '''Select d.Title,concat(b.fname," ",b.lname) as name,a.date_buy
-         from tbl_buy_doreh a left join tbl_user b on a.id_username = b.Id left join tbl_doreh c on a.id_doreh = c.Id
+         from tbl_buy_doreh a left join tbl_users b on a.id_username = b.Id left join tbl_doreh c on a.id_doreh = c.Id
           left join tbl_reshteh d on d.Id = c.id_reshteh ; ''')
     items = cursor.fetchall()
     form = CustomUserCreationForm()
@@ -108,7 +108,7 @@ def list_of_top_10_users_all(request):
     cursor = connection.cursor()
     cursor.execute(
         '''Select count(*) as num_buy, a.id_username , concat(b.fname," ",b.lname) as name
-         from tbl_buy_doreh a left join tbl_user b on a.id_username = b.Id 
+         from tbl_buy_doreh a left join tbl_users b on a.id_username = b.Id 
          group by a.id_username order by count(*) desc Limit 10 ; ''')
     items = cursor.fetchall()
     form = CustomUserCreationForm()
@@ -123,7 +123,7 @@ def list_of_top_10_users_month(request):
     cursor = connection.cursor()
     cursor.execute(
         '''Select count(*) as num_buy, a.id_username , concat(b.fname," ",b.lname) as name
-         from tbl_buy_doreh a left join tbl_user b on a.id_username = b.Id where a.date_buy >= DATE(NOW() - INTERVAL 1 Month)
+         from tbl_buy_doreh a left join tbl_users b on a.id_username = b.Id where a.date_buy >= DATE(NOW() - INTERVAL 1 Month)
           group by a.id_username order by count(*) desc Limit 10 ;''')
     items = cursor.fetchall()
     form = CustomUserCreationForm()
@@ -137,7 +137,7 @@ def list_of_top_10_users_week(request):
     cursor = connection.cursor()
     cursor.execute(
         '''Select count(*) as num_buy, a.id_username , concat(b.fname," ",b.lname) as name
-         from tbl_buy_doreh a left join tbl_user b on a.id_username = b.Id where a.date_buy >= DATE(NOW() - INTERVAL 7 DAY
+         from tbl_buy_doreh a left join tbl_users b on a.id_username = b.Id where a.date_buy >= DATE(NOW() - INTERVAL 7 DAY
           group by a.id_username order by count(*) desc Limit 10 ;''')
     items = cursor.fetchall()
     form = CustomUserCreationForm()
@@ -236,14 +236,14 @@ def list_of_last_10_orders_of_user(request):
         num = request.POST['input']
     cursor = connection.cursor()
     cursor.execute(
-        f'''Select * from tbl_buy_doreh a left join tbl_user b on a.id_username = b.Id 
+        f'''Select * from tbl_buy_doreh a left join tbl_users b on a.id_username = b.Id 
         where a.id_username={num} order by a.date_buy desc limit 10; ''')
     items = cursor.fetchall()
     cursor.execute('''SHOW columns FROM tbl_buy_doreh;''')
     columns = []
     for column in cursor.fetchall():
         columns.append(column[0])
-    cursor.execute('''SHOW columns FROM tbl_user;''')
+    cursor.execute('''SHOW columns FROM tbl_users;''')
     for column in cursor.fetchall():
         columns.append(column[0])
     columns.append('input')
@@ -354,9 +354,9 @@ def list_of_users_of_givencity_admin(request):
         num = request.POST['input']
     cursor = connection.cursor()
     cursor.execute(
-        '''select * from tbl_user group by city;''')
+        '''select * from tbl_users group by city;''')
     items = cursor.fetchall()
-    cursor.execute('''SHOW columns FROM tbl_user;''')
+    cursor.execute('''SHOW columns FROM tbl_users;''')
     columns = []
     for column in cursor.fetchall():
         columns.append(column[0])
