@@ -35,8 +35,7 @@ urlpatterns = [
     path('updating_products_by_admin', views.updating_products_by_admin,name='updating_products_by_admin'),
     path('deleting_products_by_admin', views.deleting_products_by_admin,name='deleting_products_by_admin'),
     path('creating_products_by_admin', views.creating_products_by_admin,name='creating_products_by_admin'),
-    # path('change_users/')
-
+    path('change_users', views.change_users, name='change_users'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

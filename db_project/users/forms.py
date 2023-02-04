@@ -7,7 +7,7 @@ from django.forms import ModelForm
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['email', 'username', 'password1', 'password2']
+        fields = ['username', 'password1', 'password2']
 
     def __init__(self, *args, **kwargs):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
@@ -15,9 +15,3 @@ class CustomUserCreationForm(UserCreationForm):
         #     self.fields[field].widget.attrs.update(
         #         {'class': 'input'}
         #     )
-
-
-class CustomAdminCreationForm(ModelForm):
-    class Meta:
-        model = CustomUsers
-        fields = '__all__'

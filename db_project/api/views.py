@@ -1,28 +1,38 @@
+from django.contrib.auth import login
 from django.db import connection
 from django.shortcuts import render, redirect
-from django.contrib.auth.hashers import make_password
+from .forms import CustomUserCreationForm, CustomUserCreationForm2
 
 
 def index_page(request):
     cursor = connection.cursor()
     cursor.execute('''Select concat(b.title," Code ",a.id) as list_doreh 
-        from tbl_doreh a left join tbl_reshteh b on a.id_reshteh = b.Id; ''')
+        from tbl_doreh a left join tbl_reshteh b on a.has_tbl_reshteh_id = b.Id; ''')
     items = cursor.fetchall()
     return render(request, 'index.html', {'items': items})
 
 
 def change_users(request):
-    cursor = connection.cursor()
-    username = request.POST['username']
-    first_name = request.POST['first_name']
-    last_name = request.POST['last_name']
-    ssid = request.POST['ssid']
-    password = ssid
-    phone_number = request.POST['phone_number']
-    level = request.POST['level']
-    cursor.execute(
-        f'''INSERT INTO users_customusers VALUES ("{username}","{first_name}","{last_name}","{password}","{ssid}","{phone_number}","{level}")''')
+    # cursor = connection.cursor()
+    # username = request.POST['username']
+    # first_name = request.POST['first_name']
+    # last_name = request.POST['last_name']
+    # ssid = request.POST['ssid']
+    # password = ssid
+    # phone_number = request.POST['phone_number']
+    # level = request.POST['level']
+    # cursor.execute(
+    #     f'''INSERT INTO users_customusers VALUES ("{username}","{first_name}","{last_name}","{password}","{ssid}","{phone_number}","{level}")''')
+    form = CustomUserCreationForm(request.POST)
+    if form.is_valid():
+        user = form.save(commit=False)
+        user.username = user.username.lower()
+        user.save()
+        print('registered')
+    else:
+        print("didn't register")
     return redirect('get_cart')
+
 
 def get_cart(request):
     cursor = connection.cursor()
@@ -32,8 +42,9 @@ def get_cart(request):
     columns = []
     for column in cursor.fetchall():
         columns.append(column[0])
-
-    return render(request, 'clientarea.html', {'columns': columns, 'items': items})
+    form = CustomUserCreationForm()
+    form2 = CustomUserCreationForm2()
+    return render(request, 'clientarea.html', {'columns': columns, 'items': items, 'form': form, 'form2': form2})
 
 
 def list_of_products(request):
@@ -46,7 +57,7 @@ def list_of_products(request):
 
 def list_of_users(request):
     cursor = connection.cursor()
-    cursor.execute('Select concat(fname," ",lname) as names from tbl_users; ')
+    cursor.execute('Select concat(fname," ",lname) as names from tbl_user; ')
     items = cursor.fetchall()
     return render(request, 'clientarea.html', {'columns': ['names'], 'items': items})
 
@@ -76,10 +87,6 @@ def list_of_top_10_users_all(request):
          group by a.id_username order by count(*) desc Limit 10 ; ''')
     items = cursor.fetchall()
     return render(request, 'clientarea.html', {'columns': ['num_buy', 'id_username', 'name'], 'items': items})
-
-
-def change_users(request):
-    return render(request, 'change_users.html', {})
 
 
 def list_of_top_10_users_month(request):
@@ -283,33 +290,35 @@ def list_of_providers_agiven_city_admin(request):
 
 
 def creating_products_by_admin(request):
-    num = []
     if request.method == 'POST':
-        num = request.POST['input']
-    cursor = connection.cursor()
-    cursor.execute(
-        f'''Insert into tbl_doreh('Id','id_reshteh','code_doreh','start_doreh','end_doreh','fee') 
-        values ({num[0]},{num[1]},{num[2]},'{num[3]}','{num[4]}',{num[5]});
-''')
-    items = cursor.fetchall()
-
+        start_doreh = request.POST.get('start_doreh', False)
+        id_reshteh = request.POST['id_reshteh']
+        end_doreh = request.POST.get('end_doreh', False)
+        fee = request.POST.get('fee' , False)
+        Id = request.POST.get('id_doreh', False)
+        cursor = connection.cursor()
+        cursor.execute(
+            f'''Insert into tbl_doreh(`Id`,`id_reshteh`,`start_doreh`,`end_doreh`,`fee`) 
+                values ("{Id}","{id_reshteh}","{start_doreh}","{end_doreh}","{fee}");
+        ''')
+    return render(request, 'create.html')
 
 def updating_products_by_admin(request):
     if request.method == 'POST':
-        id_reshteh = request.POST['id_reshteh']
-        start_doreh = request.POST['start_doreh']
-        end_doreh = request.POST['end_doreh']
-        fee = request.POST['fee']
-        closed = request.POST['closed']
-        Id = request.POST['Id']
+        #id_reshteh = request.POST['id_reshteh']
+        start_doreh = request.POST.get('start_doreh', False)
+        end_doreh = request.POST.get('end_doreh', False)
+        fee = request.POST.get('fee' , False)
+        #is_private = request.POST.get('is_private', False)
+        #closed = request.POST['closed']
+        Id = request.POST.get('id_doreh', False)
         cursor = connection.cursor()
         cursor.execute(f'SELECT * FROM tbl_doreh WHERE Id="{Id}";')
         result = cursor.fetchall()
         if result:
             cursor.execute(
-                f'''Update tbl_doreh a set a.Id = "{Id}",a.id_reshteh = "{id_reshteh}" , a.start_doreh= "{start_doreh}",
-                a.end_doreh = "{end_doreh}", a.fee_together= "{fee}", a.closed = "{closed}"
-                where Id="{Id}";
+                f'''Update tbl_doreh a set a.Id = "{Id}", a.start_doreh= "{start_doreh}",
+                a.end_doreh = "{end_doreh}", a.fee_together= "{fee}" where Id="{Id}";
             ''')
             result = f'product with id {Id} updated successfully'
         else:
