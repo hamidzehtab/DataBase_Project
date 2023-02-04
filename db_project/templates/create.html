@@ -1,0 +1,416 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DB_project</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width , initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/root.css' %}">
+    <link rel="stylesheet" href="{% static 'css/clientarea.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+
+    <meta name="msapplication-TileImage" content="images/icon.png">
+    <link rel="image_src" href="{% static 'images/icon.png' %}">
+    <meta property="og:iage" content="{% static 'images/icon.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/icon.png' %}">
+
+</head>
+<body>
+    <div class="login">
+        <div class="forms8 forms">
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <div class="arrow-header">
+                    <span>ورود به سامانه</span>
+                    <div class="arrow"></div>
+                </div>
+                <div class="form">
+                    <input type="text" name="username" id="code" autocomplete="username" required>
+                    <label for="name" class="label-name">
+                        <span class="content-name">نام کاربری یا شماره موبایل</span>
+                    </label>
+                </div>
+                <div class="form">
+                    <input type="password" name="password" id="pass" autocomplete="off" required>
+                    <label for="pass" class="label-name">
+                        <span class="content-name">رمز عبور</span>
+                    </label>
+                </div>
+                <div class="forgot-div">
+                    <a class="forgot-pass" onclick="forgot()">
+    
+                    </a>
+                </div>
+                <div class="btn-div">
+                    <input class="btn btn--sub btn--lg btn-login" type="submit" value="ورود"/>
+                </div>
+                <div class="btn-div">
+                    <button class="btn-register" onclick="back1()">
+                        ثبت نام
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="forms4 forms">
+            <div class="arrow-header">
+                <span>ثبت نام (اطلاعات اولیه)</span>
+                <div class="arrow"></div>
+            </div>
+            <div class="form">
+                <input type="text" name="name" id="username4" autocomplete="off" required>
+                <label for="name" class="label-name">
+                    <span class="content-name">نام کاربری</span>
+                </label>
+            </div>
+            <div class="form">
+                <input type="text" id="name4" autocomplete="off" required>
+                <label class="label-name">
+                    <span class="content-name">نام</span>
+                </label>
+            </div>
+            <div class="form">
+                <input type="text" id="lname4" autocomplete="off" required>
+                <label class="label-name">
+                    <span class="content-name">نام خانوادگی</span>
+                </label>
+            </div>
+            <div class="form">
+                <input type="password" name="pass" id="pass4" autocomplete="off" required>
+                <label for="pass" class="label-name">
+                    <span class="content-name">رمز عبور</span>
+                </label>
+            </div>
+            <div class="form">
+                <input type="password" name="pass" id="tpass4" autocomplete="off" required>
+                <label for="pass" class="label-name">
+                    <span class="content-name">تکرار رمز عبور</span>
+                </label>
+            </div>
+            <div class="forgot-div">
+                <a class="forgot-pass">
+    
+                </a>
+            </div>
+            <div class="btn-div">
+                <input class="btn btn--sub btn--lg btn-register" type="submit" value="ثبت نام"/>
+            </div>
+            <div class="btn-div">
+                <button class="btn-register" onclick="back4()">
+                    بازگشت به قسمت ورود
+                </button>
+            </div>
+        </div>
+        <div class='forms01 forms mnforms'>
+            <div class='arrow-header'>
+                <span class='before-h'><i class='fa fa-user' aria-hidden='true'></i> جست و جو کاربر </span>
+                <div class='arrow'></div>
+            </div>
+            <div class='inform-div'>
+                <a class='inform-p before-p'>
+                </a>
+            </div>
+    
+            <form action="" method="post" id="custom">
+                {% csrf_token %}
+                <div class='row-modal' style='margin:5px 0;'>
+    
+                    <div class='form' style='display:inline-block;margin-left:2%;'>
+                        <input name='username' type='text' id='inpmod1' onkeyup='search_user_div()' autocomplete='off' required>
+                        <label class='label-name'>
+                            <span class='content-name'>نام کاربری</span>
+                        </label>
+                    </div>
+                    <div class='form' style='display:inline-block;margin-left:2%;'>
+                        <input name='first_name' type='text' id='inpmod2' onkeyup='search_user_div()' autocomplete='off' required>
+                        <label class='label-name'>
+                            <span class='content-name'>نام</span>
+                        </label>
+                    </div>
+                    <div class='form' style='display:inline-block;margin-left:2%;'>
+                        <input name='last_name' type='text' id='inpmod3' onkeyup='search_user_div()' autocomplete='off' required>
+                        <label class='label-name'>
+                            <span class='content-name'>نام خانوادگی</span>
+                        </label>
+                    </div>
+                    <div class='form' style='display:inline-block;margin-left:2%;'>
+                        <input name='ssid' type='number' id='inpmod4' onkeyup='search_user_div()' autocomplete='off' required>
+                        <label class='label-name'>
+                            <span class='content-name'>کد ملی</span>
+                        </label>
+                    </div>
+                    <div class='form' style='display:inline-block;margin-left:2%;'>
+                        <input name='phone_number' type='number' id='inpmod5' onkeyup='search_user_div()' autocomplete='off' required>
+                        <label class='label-name'>
+                            <span class='content-name'>شماره تلفن</span>
+                        </label>
+                    </div>
+                    <div class='select-div' style='margin:0 2px 0 7px;'><span class='select-span'> سطح دسترسی </span>
+                        <select form="custom" name="level" class='classic sp-select' id='inpmod6' onchange='search_user_div()'>
+                        <option value='0'>...</option>
+                        <option value='1'>کاربر</option>
+                        <option value='2'>ادمین</option>
+                    </select>
+                    </div>
+                    <div class="incomp height">
+                        <input style="border:0px;background-color:transparent;padding: 0px;" type="submit" value="جدید">
+                    </div>
+                </div>
+    
+            </form>
+            </br>
+            <div id='search_user_div'></div>
+            <div class='forgot-div'>
+                <a class='forgot-pass' onclick='forgot()'>
+                </a>
+            </div>
+        </div>
+        <a class="close-login" href="#"><i class="fa fa-times "></i></a>
+    
+    </div>
+<div class="alert-box hidden">
+    <span id="alert-value">نام کاربری یا  رمز عبور اشتباه است 	</span>
+    <span class="close-alert" onclick="close_it()"> &times; </span>
+</div>
+
+<div id="cl_bt1" class="cl_bt"><i class="fas fa-times" style="font-size:16px;"></i></div>
+
+
+<div class="wrapper">
+    <div id="nav">
+        <div class="back">
+            <div class="dropdown">
+                <a class="dropbtn alpbox">
+                    حساب کاربری
+                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                </a>
+                <div class="dropdown-content">
+                    {% if not request.user.is_authenticated %}
+                        <div class="dropdown-content-li" onclick="new_token()">
+                            <i class='fa fa-user' aria-hidden='true'></i>
+                            ورود به حساب
+                        </div>
+                    {% endif %}
+                    {% if request.user.is_authenticated %}
+                        <a class="dropdown-content-li" href="{% url 'logout' %}" target="_self">
+                            <i class='fas fa-sign-out-alt' aria-hidden='true'></i>
+                            خروج از حساب
+                        </a>
+                    {% endif %}
+                    <div class="dropdown-content-li" onclick="first_pass()">
+                        <i class='fa fa-key' aria-hidden='true'></i>
+                        تغییر رمز عبور
+                    </div>
+                </div>
+
+
+            </div>
+            <div>
+                <a href="index.html" class="alpbox" style="color:var(--black)" target="_blank">
+                    <i class="fa fa-home"></i>
+                    خانه
+                </a>
+            </div>
+        </div>
+
+        <div class="logo-div">
+            <span>DB_project</span>
+        </div>
+        <a id="icon" onclick="burger();"><i class="fa fa-bars burger" aria-hidden="true"></i></a>
+        <a class="icon2" onclick="first_messagebox();"><i class="fa fa-envelope message" value="۰"
+                                                          aria-hidden="true"></i></a>
+        <div class="more">
+                    <span id="more-span">
+                        DB_project
+                    </span>
+        </div>
+        <div class="area">
+            <div class="top">
+                <div class="top-img-div">
+                    <img class="top-img" src="images/user1.png" id="top-img-src"/>
+                    <div class="p-image">
+                        <i class="fa fa-camera upload-button"></i>
+                        <input class="file-upload-input" id="file_input-1" type="file" accept="image/*"/>
+                    </div>
+                </div>
+                <div class="top-p">
+                    <div>
+                        <span id="fnamet">نام</span>
+                        <span id="lnamet">خانوادگی</span>
+                    </div>
+                    <span id="usert">کاربر</span></br>
+                    <span id="cmelt">نام کاربری</span>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="see_karshenas">
+                    <a href="clientarea.html?v=1">
+                        <div class="summary-div">
+                            <div class="summary-div2">
+                                <i class="fa fa-home icon-summary circle_number ccir_num" value="۰"
+                                   aria-hidden="true"></i>
+                                میزکار
+                            </div>
+                        </div>
+                    </a>
+                    <details>
+                        <summary>
+                            <div>
+                                <i class="fa fa-user icon-summary" aria-hidden="true"></i>
+                                کاربر و سفارش
+                            </div>
+                        </summary>
+                        <div class="content">
+                            <ul>
+                                <li class="content-li" onclick="change_user()"><a href="#">user(F4)</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_products">لیست محصولات</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_users">لیست کاربران</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_orders">سفارشات</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_top_10_users_all">ده برتر</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_top_10_users_week">ده برتر هفته</a>
+                                </li>
+                                <li class="content-li" onclick=""><a href="list_of_top_10_users_month">ده برتر ماه</a>
+                                </li>
+                                <li class="content-li" onclick=""><a href="list_of_last_10_orders_of_user">10 سفارش آخر
+                                    کاربر</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_users_of_givencity_admin">کاربران
+                                    شهر</a></li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details>
+                        <summary>
+                            <div>
+                                <i class="fa fa-cube icon-summary" aria-hidden="true"></i>
+                                محصول
+                            </div>
+                        </summary>
+                        <div class="content">
+                            <ul>
+                                <li >
+                                    <ul>
+                                        <li>
+                                            <details style="margin-right:-25px" >
+                                                <summary style="direction:rtl;padding:6px;background-color:#2D3456;color:gray">
+                                                    <div style="margin-right:20px;margin-top:-22px">
+                                                        تعریف
+                                                    </div>
+                                                </summary>
+                                                <div class="content" style="background-color:#2F3637;box-shadow:0px 0px 0px;" >
+                                                    <ul class="sub-sub-ul" style="padding-right:15px;border-right:0px solid gray;">
+                                                        <li class="content-li" onclick=""><a href="creating_products_by_admin">اضافه کردن</a> </li>
+                                                        <li class="content-li" onclick=""><a href="updating_products_by_admin">ویرایش</a></li>
+                                                        <li class="content-li" onclick=""><a href="deleting_products_by_admin">حذف</a></li>
+                                                    </ul>
+                                                </div>
+                                            </details>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="content-li" onclick=""><a href="list_of_product_types">دسته بندی محصولات</a>
+                                </li>
+                                <li class="content-li" onclick=""><a href="list_of_top_sold_product_week">پرفروش ترین
+                                    هفته</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_top_sold_procut_month">پرفروش ترین
+                                    ماه</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_special_offers">پیشنهادات ویژه</a>
+                                </li>
+                                <li class="content-li" onclick=""><a href="list_of_sale_for_agiven_product_admin">فروش
+                                    در ماه</a></li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details>
+                        <summary>
+                            <div>
+                                <i class="fas fa-school icon-summary" aria-hidden="true"></i>
+                                فروشنده
+                            </div>
+                        </summary>
+                        <div class="content">
+                            <ul>
+                                <li class="content-li" onclick=""><a href="list_of_providersof_product_admin">فروشنده
+                                    های دوره</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_providersof_product_admin_2">فروشنده
+                                    های دوره</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_cheapest_providerof_products_admin">ارزان
+                                    فروش ترین فروشنده</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_average_sale_for_store_admin">میانگین
+                                    کل فروش</a></li>
+                                <li class="content-li" onclick=""><a href="list_of_providers_agiven_city_admin">فروشنده
+                                    شهر</a></li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details>
+                        <summary>
+                            <div>
+                                <i class="fa fa-comment icon-summary" aria-hidden="true"></i>
+                                نظرات
+                            </div>
+                        </summary>
+                        <div class="content">
+                            <ul>
+                                <li class="content-li" onclick=""><a
+                                        href="list_of_comments_for_agiven_product">نظرات</a></li>
+                                <li class="content-li" onclick=""><a
+                                        href="list_of_top3_best_comments_for_agiven_product">بهترین نظرات</a></li>
+                                <li class="content-li" onclick=""><a
+                                        href="list_of_top3_worst_comments_for_agiven_product">بدترین نظرات</a></li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+        <div class="main fix-background animate__animated animate__faster">
+            <div class="null-div">
+                <form action="" style="display: flex; background-color: lightblue;padding:10px;" method="post"
+                          style="display:flex;">
+                        {% csrf_token %}
+                        <div class="form" style="margin-left:10px;">
+                            <input type="text" name="id_doreh" id="Id">
+                            <label for="id" class="label-name">
+                                <span class="content-name">کد دوره</span>
+                            </label>
+                        </div>
+                        <div class="form" style="margin-left:10px;">
+                            <input type="text" name="id_reshteh" id="id_reshteh">
+                            <label for="id_reshteh" class="label-name">
+                                <span class="content-name">کد رشته</span>
+                            </label>
+                        </div>
+                        <div class="form" style="margin-left:10px;">
+                            <input type="text" name="start_doreh" id="start_doreh">
+                            <label for="start_doreh" class="label-name">
+                                <span class="content-name">شروع دوره</span>
+                            </label>
+                        </div>
+                        <div class="form" style="margin-left:10px;">
+                            <input type="text" name="end_doreh" id="end_doreh">
+                            <label for="end_doreh" class="label-name">
+                                <span class="content-name">پایان دوره</span>
+                            </label>
+                        </div>
+                        <div class="form" style="margin-left:10px;">
+                            <input type="text" name="fee" id="fee">
+                            <label for="fee" class="label-name">
+                                <span class="content-name">هزینه</span>
+                            </label>
+                        </div>                        
+                        <div class="incomp height">
+                            <input style="border:0px;background-color:transparent;padding: 0px;" type="submit"
+                                   value="create">
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="{% static 'javascript/jquery.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'javascript/clientarea.js' %}" type="text/javascript"></script>
+
+</html>

@@ -283,16 +283,18 @@ def list_of_providers_agiven_city_admin(request):
 
 
 def creating_products_by_admin(request):
-    num = []
     if request.method == 'POST':
-        num = request.POST['input']
-    cursor = connection.cursor()
-    cursor.execute(
-        f'''Insert into tbl_doreh('Id','id_reshteh','code_doreh','start_doreh','end_doreh','fee') 
-        values ({num[0]},{num[1]},{num[2]},'{num[3]}','{num[4]}',{num[5]});
-''')
-    items = cursor.fetchall()
-
+        start_doreh = request.POST.get('start_doreh', False)
+        id_reshteh = request.POST['id_reshteh']
+        end_doreh = request.POST.get('end_doreh', False)
+        fee = request.POST.get('fee' , False)
+        Id = request.POST.get('id_doreh', False)
+        cursor = connection.cursor()
+        cursor.execute(
+            f'''Insert into tbl_doreh(`Id`,`id_reshteh`,`start_doreh`,`end_doreh`,`fee`) 
+                values ("{Id}","{id_reshteh}","{start_doreh}","{end_doreh}","{fee}");
+        ''')
+    return render(request, 'create.html')
 
 def updating_products_by_admin(request):
     if request.method == 'POST':
