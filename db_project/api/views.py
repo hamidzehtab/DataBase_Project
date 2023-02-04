@@ -57,7 +57,7 @@ def list_of_products(request):
 
 def list_of_users(request):
     cursor = connection.cursor()
-    cursor.execute('Select concat(fname," ",lname) as names from tbl_user; ')
+    cursor.execute('Select concat(fname," ",lname) as names from tbl_users; ')
     items = cursor.fetchall()
     return render(request, 'clientarea.html', {'columns': ['names'], 'items': items})
 
@@ -350,15 +350,15 @@ def creating_users_by_admin(request):
         password = request.POST.get('password', False)
         fname = request.POST.get('fname', False)
         lname = request.POST.get('lname', False)
-        phone = request.POST.get('Id_users', False)
+        phone = request.POST.get('phone', False)
         codemelli = request.POST.get('codemelli', False)
         city = request.POST.get('city', False)
         email = request.POST.get('email', False)
 
         cursor = connection.cursor()
         cursor.execute(
-            f'''Insert into `tbl_users`(`Id`,`username`,`password`,`fname`,`lname`,`phone`,`codemelli`,`city`,`email`) 
-            values ("{Id}","{username}","{password}","{fname}","{lname}","{phone}","{codemelli}","{city}","{email}");
+            f'''Insert into `tbl_users`(`Id`,`username`,`password`,`fname`,`lname`,`phone`,`codemeli`,`city`,`email`,`active`,`state`) 
+            values ("{Id}","{username}","{password}","{fname}","{lname}","{phone}","{codemelli}","{city}","{email}",1,1);
         ''')
     return render(request, 'create_users_by_admin.html')
 
@@ -369,7 +369,7 @@ def updating_users_by_admin(request):
         password = request.POST.get('password', False)
         fname = request.POST.get('fname', False)
         lname = request.POST.get('lname', False)
-        phone = request.POST.get('Id_users', False)
+        phone = request.POST.get('phone', False)
         codemelli = request.POST.get('codemelli', False)
         city = request.POST.get('city', False)
         email = request.POST.get('email', False)
@@ -379,10 +379,9 @@ def updating_users_by_admin(request):
         if result:
             cursor.execute(
                 f'''Update tbl_users a set a.Id = "{Id}", a.username= "{username}",
-                a.password = "{password}", a.fname= "{fname}" , a.lname= "{lname}", a.phone= "{phone}", a.codemelli= "{codemelli}", a.city= "{city}", a.email= "{email}" where Id="{Id}";
+                a.password = "{password}", a.fname= "{fname}" , a.lname= "{lname}", a.phone= "{phone}", a.codemeli= "{codemelli}", a.city= "{city}", a.email= "{email}" where Id="{Id}";
             ''')
             result = f'user with id {Id} updated successfully'
         else:
             result = f'no such user with id {Id}'
-        return render(request, 'updating_users_by_admin.html', {'result': result})
     return render(request, 'updating_users_by_admin.html')
