@@ -7,7 +7,7 @@ from .forms import CustomUserCreationForm, CustomUserCreationForm2
 def index_page(request):
     cursor = connection.cursor()
     cursor.execute('''Select concat(b.title," Code ",a.id) as list_doreh 
-        from tbl_doreh a left join tbl_reshteh b on a.has_tbl_reshteh_id = b.Id; ''')
+        from tbl_doreh a left join tbl_reshteh b on a.id_reshteh = b.Id; ''')
     items = cursor.fetchall()
     return render(request, 'index.html', {'items': items})
 
@@ -301,7 +301,7 @@ def creating_products_by_admin(request):
             f'''Insert into tbl_doreh(`Id`,`id_reshteh`,`start_doreh`,`end_doreh`,`fee`) 
                 values ("{Id}","{id_reshteh}","{start_doreh}","{end_doreh}","{fee}");
         ''')
-    return render(request, 'create.html')
+    return render(request, 'update.html')
 
 def updating_products_by_admin(request):
     if request.method == 'POST':
@@ -341,3 +341,46 @@ def deleting_products_by_admin(request):
             result = f'no so such product with id {id}'
         return render(request, 'delete.html', {'result': result})
     return render(request, 'delete.html')
+
+
+def creating_users_by_admin(request):
+    if request.method == 'POST':
+        Id = request.POST.get('Id_users', False)
+        username = request.POST.get('username', False)
+        password = request.POST.get('password', False)
+        fname = request.POST.get('fname', False)
+        lname = request.POST.get('lname', False)
+        phone = request.POST.get('Id_users', False)
+        codemelli = request.POST.get('codemelli', False)
+        city = request.POST.get('city', False)
+        email = request.POST.get('email', False)
+
+        cursor = connection.cursor()
+        cursor.execute(
+            f'''Insert into `tbl_users`(`Id`,`username`,`password`,`fname`,`lname`,`phone`,`codemelli`,`city`,`email`) 
+            values ("{Id}","{username}","{password}","{fname}","{lname}","{phone}","{codemelli}","{city}","{email}");
+        ''')
+    return render(request, 'create.html')
+
+def updating_users_by_admin(request):
+    if request.method == 'POST':
+        #id_reshteh = request.POST['id_reshteh']
+        start_doreh = request.POST.get('start_doreh', False)
+        end_doreh = request.POST.get('end_doreh', False)
+        fee = request.POST.get('fee' , False)
+        #is_private = request.POST.get('is_private', False)
+        #closed = request.POST['closed']
+        Id = request.POST.get('id_doreh', False)
+        cursor = connection.cursor()
+        cursor.execute(f'SELECT * FROM tbl_doreh WHERE Id="{Id}";')
+        result = cursor.fetchall()
+        if result:
+            cursor.execute(
+                f'''Update tbl_doreh a set a.Id = "{Id}", a.start_doreh= "{start_doreh}",
+                a.end_doreh = "{end_doreh}", a.fee_together= "{fee}" where Id="{Id}";
+            ''')
+            result = f'product with id {Id} updated successfully'
+        else:
+            result = f'no such product with id {Id}'
+        return render(request, 'update.html', {'result': result})
+    return render(request, 'update.html')
