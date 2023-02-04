@@ -296,7 +296,7 @@ def creating_products_by_admin(request):
 
 def updating_products_by_admin(request):
     if request.method == 'POST':
-        code_doreh = request.POST['code_doreh']
+        id_reshteh = request.POST['id_reshteh']
         start_doreh = request.POST['start_doreh']
         end_doreh = request.POST['end_doreh']
         fee = request.POST['fee']
@@ -307,7 +307,7 @@ def updating_products_by_admin(request):
         result = cursor.fetchall()
         if result:
             cursor.execute(
-                f'''Update tbl_doreh a set a.Id = "{code_doreh}", a.start_doreh= "{start_doreh}",
+                f'''Update tbl_doreh a set a.Id = "{Id}",a.id_reshteh = "{id_reshteh}" , a.start_doreh= "{start_doreh}",
                 a.end_doreh = "{end_doreh}", a.fee_together= "{fee}", a.closed = "{closed}"
                 where Id="{Id}";
             ''')
